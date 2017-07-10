@@ -1,0 +1,37 @@
+\chapter{Conclusiones, publicaciones y trabajos futuros} \label{chap:Conclusiones}
+Finalmente en este capítulo se menciona las conclusiones, publicaciones y propuestas para trabajos futuro derivados del trabajo de tesis expuesto.
+\section{Conclusiones}
+
+En este trabajo de tesis se logró presentar un \textit{pipeline} de reconocimiento de rostros en vídeo vigilancia, lográndolo mediante la modificación de \ac{EBGM} con \ac{CLNF}. Junto a ello se realizó una comparativa de varios métodos holísticos con \ac{EBGM} probando que puede competir con ellos, también se realizó una evaluación de los parámetros que influyen en \ac{EBGM} para mejorar el proceso de reconocimiento.
+
+Se probó que las transformaciones de perspectiva para incrementar el conjunto de entrenamiento no tienen ningún efecto en el aumento de aciertos del reconocimiento.
+
+Se demostró que la modificación propuesta usando \ac{CLNF} como reemplazo para la función de detección de puntos permite el uso de \ac{EBGM} en vídeo, cubriendo el punto mas débil del algoritmo.
+
+La propuesta del \textit{pipeline} en mejora de iluminación enfrenta parte del problema presentado por el ambiente no controlado, según los resultados experimentales el medio día es el momento del día mas difícil para el reconocimiento debido a la posición del sol.
+
+El uso de gafas dificulta el reconocimiento por acentuar la oclusión del rostro. Mientras que en días extremadamente soleados y causan que las persona cambien su comportamiento, como ocultar su rostros y provoca ciertas sombras, como las que se proyectan con la nariz y la cuenca de los ojos se pronuncien más. 
+
+%En colores de tez muy oscuras en muchos casos, son difíciles detectar el rostro en la escena y los puntos fiduciales.
+
+Aun no es posible realizar el reconocimiento con una sola imagen por persona como conjunto de entrenamiento, por ello es necesario la elección de un conjunto de entrenamiento que cubra por los menos vistas frontales, de izquierda y de derecha para un reconocimiento adecuado.%, también es necesario un análisis que permita incluir un método de súper-resolución para mejorar el porcentaje de aciertos del reconocimiento.
+
+Finalmente en lo que respecta al reconocimiento de imágenes ofuscadas las máscaras de Gabor pueden seguir recolectado información relevante aun si la imagen ha sido modificado por un \textit{blurring}, esto se debe a que las mascaras recolectan información regional en el espacio de las señales para poder hacer un reconocimiento.
+
+\section{Trabajos futuros}
+A raíz de este trabajo de tesis se ha desarrollado varias propuestas para trabajos futuros siendo los mas relevantes los siguientes:
+\begin{itemize}
+\item Resolver el problema de hallar una configuración optima para los pesos de la función de similitud de \ac{EBGM}.
+\item Probar técnicas de súper resolución para mejorar el reconocimiento y poder detectar rostros pequeños en baja resolución.
+\item Establecer un método de \textit{tracking} que sea robusto en los ambientes no controlados.
+\item Realizar un análisis del coste computacional del proceso de \textit{pipeline} e identificar que procesos se pueden optimizar
+\item Es necesario seguir la investigación de McPherson\cite{mcpherson2016defeating} para poder replicar el experimento y probar con más bases de datos, situaciones de video, y uniformizar las condiciones de las pruebas.
+\end{itemize}
+
+\section{Publicaciones}
+A lo largo de este trabajo de tesis se presentó los siguientes artículos:
+\begin{itemize}
+\item An Improved Face Recognition Based on Illumination Normalization Technique and Elastic Bunch Graph Matching en ICFIP 2017 International Conference on Frontiersof Image Processing (Articulo aceptado)
+\item Modifications on Illumination,Distance function and Gabor masks for Elastic Bunch Graph Matching en la 35th International Conference of the Chilean Computer Science Society (SCCC 2016) organizado con la 42th Latin American Computing Conference (CLEI 2016)\cite{caceresmodifications}.
+\end{itemize}
+

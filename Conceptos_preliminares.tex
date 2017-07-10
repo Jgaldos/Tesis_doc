@@ -1,0 +1,92 @@
+\chapter{Conceptos preliminares}
+Antes de poder hablar sobre los trabajos relacionados es necesario explicar a las técnicas de reconocimiento usadas como comparativa para determinar el método reconocimiento seleccionado \cite{zhao2003face}. También explicar los criterios usados para la selección del método a analizar y mejorar.
+%%explicacion de los metodos usados
+\section{Métodos de reconocimiento de rostros}
+Los métodos usado para nuestra comparativa son varios métodos conocidos en la literatura y usados como referencia de facto, los métodos holísticos presentados están implementados en matlab\cite{struc2012phd} y \ac{EBGM}
+\subsection{\ac{PCA}}
+\ac{PCA} es un método para la reducción de la dimensionalidad sin supervisión \cite{sirovich1987low} \cite{turk1991eigenfaces}. Asumamos que tenemos un conjunto de \textit{N} muestras de imágenes $ { x_1,x_2,...,x_N} \in R^n$.
+Cada imagen pertenece a una de $m$ clases $C_1,C_2,...,C_m$. Definimos una matriz de dispersión $S_T$ como \[ S_T= \sum_{k=1}^{N} (x_k-\mu)(x_k-\mu) \] donde $\mu$ es la media de los datos.
+\ac{PCA} determina la proyección ortogonal $\phi$ en \[y_k=\phi^T x_k, k=1,..,N \] que maximiza  la determinante de la matriz de dispersión de las muestra proyectadas $y_1,....,Y_N$:
+\[ \phi_{opt}= \operatorname*{arg\,max}_\phi \left|\phi^T S_T \phi  \right| \]
+Esta dispersión de las variaciones $inter-clase$ entre los objetos, también como las variaciones $intra-clase$ dentro de los objetos. La mayoría de las diferencias entre rostros se deben a factores
+externo tale como ángulo de visión e iluminación. Como \ac{PCA} no diferencia entre variaciones inter-clases y intra-clase falla en discriminar bien entre objetos.
+\subsubsection{Cálculo de distancia}
+En el método anterior la forma de abordar el problema es con un enfoque estadístico el cual toma las imágenes de rostros y a través de operaciones matemáticas transforma los rostros normalizados a un sub-espacio vectores. Para que el reconocimiento sea posible es necesario que exista una métrica de distancia para encontrar al rostro más cercano en el  sub-espacio de vectores.
+Una propuesta es usar distancia euclidiana, pero para el caso de \ac{PCA} y \ac{LDA} se usa la distancia Mahalanobis. Para unos vectores de entrada $\mu$ y $\lambda$ la distancia Mahalanobis es definida como
+\[d_M(\mu,\lambda)= (\mu-\lambda)_T \Sigma^{-1}(\mu-\lambda)\] donde $\Sigma^{-1}$ es la inversa de la matriz de covarianza de los datos.
+\subsection{\ac{KFA}}
+\ac{KFA} \cite{liu2006capitalize} es un método que capitaliza la técnicas de incremento de la dimensionalidad, primero realiza un mapeo del espacio de la información de entrada a un espacio de características de alta dimensionalidad, y después implementa el análisis multiclase de Fisher en dicho espacio de características. \ac{KFA} usa Gabor Wavelets como método para incrementar la dimensionalidad
+\subsection{\ac{KPCA}}
+Es una forma no lineal de \ac{PCA} \cite{scholkopf1998nonlinear}, con el uso de una función integral como operador de una función Kernel, se pude computar con mayor eficiencia los componentes principales en un espacio de características. Su objetivo es presentar una forma de abordar el problema del calculo de auto valores que se presenta para poder realizar el proceso de \ac{PCA}
+\subsection{\ac{LDA}}
+\ac{LDA} usado para el reconocimiento de rostros \cite{zhao1999subspace} es un método holístico que consiste en dos pasos: primero se proyecta la imagen del rostro de su representación original como vector a un sub-espacio de rostro a través de \ac{PCA}, luego usamos LDA para obtener un clasificador lineal en el sub-espacio creado. El criterio que se usa para determinar la dimensión del sub-espacio permite generar características que separan las clases a través de \ac{LDA} del total de la representación del sub-espacio.
+\subsubsection{\ac{LDA} como un clasificador de patrones}
+En aplicaciones aplicaciones típicas de reconocimiento de rostros tenemos vectores de imágenes de rostros de enormes dimensiones, y a pesar de ser proyectados en un sub-espacio, la dimensión de las características en varios casos son mayores a centenar, ya que tampoco es conveniente que la dimensión del sub-espacio sea pequeña. Este problema lleva a lo que se conoce como el fenómeno llamado "\textit{dimensionality curse}" que se refiere a los problemas se presentan al organizar y analizar data de alta dimensionalidad.
+Sin embargo \ac{LDA} puede ser aplicado como un clasificador de patrones en estas malas condiciones.
+\subsection{\ac{EBGM}}
+\ac{EBGM} \cite{wiskott1997face} se basa en el concepto que las imágenes de los rostros reales tienen muchas características no lineales que no son abordadas por los métodos de análisis mostrado en las secciones anteriores, tales como variaciones en la iluminación, pose y expresión. Una transformación de Gabor wavelet crea una arquitectura de enlaces dinámicos que proyecta el rostro en una malla elástica.
+El Gabor Jet es un nodo en la malla elástica, el cual describe el comportamiento alrededor de un pixel. Esto es el resultado de la convolución de una imagen con un filtro de Gabor, el cual es usado
+para detectar formas y extraer características.
+El reconocimiento esta basado en la similaridad de la respuesta filtro de Gabor a cada nodo. La dificultad con este método es el requerimiento de marcar puntos precisos en los rostros.
+\begin{figure}[h]
+	\center
+    \label{Grafo}
+	\includegraphics[scale=1]{Graph}
+    \caption{Puntos fiduciales que componen el grafo del rostro,los puntos son definidos en el trabajo de Wiskott \cite{wiskott1997face}}
+\end{figure}
+
+\subsection{Pre-procesamiento}
+Se entiende como pre-procesamiento a las técnicas que modifican una imagen para acentuar alguna característica, en este caso Prestamos las técnicas  
+\subsubsection{Ecualización de histograma}
+Las ecualización del histograma de una imagen es una transformación que pretende obtener para una imagen un histograma con una distribución uniforme. Es decir, que exista el mismo número de pixels para cada nivel de gris del histograma de una imagen monocroma \cite{orlova2002image}.
+La función de la ecualización es:
+\[h(v)=Redondeo\Bigg(\frac{cdf(v)-cdf_{min}}{(M\times N)-cdf_{min}} \times (L-1)\Bigg)\]
+donde $cdt_{min}$ el el mínimo valor no nulo de la función de distribución de acumulación. $M\times N$ es el numero de pixeles en la imagen y $L$ es el numero de niveles de la escala de gris.
+\subsubsection{Transformada de logaritmo}
+La Transformada de Logaritmo asigna un rango estrecho de valores (píxeles en escala de grises o un canal de un espacio de color) de un rango amplio de valores de entrada. La transformada de logaritmos es útil si se necesita expandir los valores de píxeles oscuros de una imagen mientras se comprime los valores altos \cite{thamiz2015liter}
+\begin{equation}
+\label{f_log}
+s = c*log(1+ 256*r)
+\end{equation}
+La fórmula general de la transformada logarítmica está dada por la Eq. \ref{f_log}. Donde $r$ es la imagen de entrada, $c$ es una constante, $s$ es la imagen mejorada. Para la transformada de logaritmo se utilizo el valor de 20 para la constante $ c $. 
+\subsubsection{Transformada discreta de coseno}
+La transformada Discreta de coseno (DCT por sus siglas en ingles) es utilizada1D especialmente en el procesamiento de señales e imágenes. DCT expresa en una secuencia finita de puntos, datos en términos de sumas de funciones de coseno en diferentes frecuencias. En el procesamiento de imágenes, la utilización de DCT ayuda a descomponer una imagen en frecuencias, donde usualmente los pequeños componentes de frecuencia altas pueden ser descartados. La ecuación en 2D está dada por la Eq. \ref{f_dct}
+\cite{thamiz2015liter}\cite{vish2015ill}
+
+\begin{equation}
+	\label{f_dct}
+	\resizebox{0.91\hsize}{!}{
+		$ C(u,v) = \alpha(u)\alpha(v)\sum\limits_{x=0}^{N-1} \sum\limits_{y=0}^{N-1}f(x,y)cos\left[\frac{\pi(2x + 1)u}{2N}\right]cos\left[\frac{\pi(2y + 1)v}{2N}\right] $
+	}
+\end{equation}
+
+Donde: $u$, $v$, $N$, $\alpha(u)$ y $\alpha(v)$ se definen de igual forma que la ecuación 1D. La ecuación inversa está definida por la Eq. \ref{f_idct}.
+
+\begin{equation}
+	\label{f_idct}
+	\resizebox{0.91\hsize}{!}{
+		$ f(x,y) = \sum\limits_{x=0}^{N-1}\sum\limits_{y=0}^{N-1} \alpha(u)\alpha(v)C(u,v)cos\left[\frac{\pi(2x + 1)u}{2N}\right]cos\left[\frac{\pi(2y + 1)v}{2N}\right]$
+	}
+\end{equation}
+
+El resultado de la transformada de coseno, es una matriz de coeficientes positivos y negativos, los cuales representan la adición o resta de una determinada frecuencia para generar la imagen procesada por la Transformada discreta de Coseno.
+
+\subsection{Reconocimiento biométrico}
+El reconocimiento biométrico se refiere a una forma de reconocimiento basado en un vector de características que derivan mayormente de características biológicas, se considera mucho mas confiable que otros métodos de reconocimiento que usan claves, contraseñas, tarjetas, etc \cite{alice2003biometric}.
+Cualquier característica humana que se pueda ser considerado biométrico debe satisfacer los siguientes requerimientos:
+\begin{itemize}
+\item Universalidad.- toda persona debe tener dicha característica.
+\item Distintividad.- Cualquier par de personas debe ser diferente en términos de dicha característica
+\item Permanencia.-La característica debe ser lo suficientemente invariable a lo largo del tiempo para que pueda ser usada como criterio de comparación.
+\item Medible.-La característica debe ser cuantitativamente mensurable.
+\end{itemize}
+
+Pero para que un método de reconocimiento biométrico sea viable en la vida real se necesita considerar otros tres factores:
+Rendimiento.- que se entiende en precisión, velocidad y requerimiento de tecnología y equipo.
+Aceptabilidad.- debe ser aceptado por el usuario, eso significa que no debe ser intrusivo y tampoco dañarlo.
+Finalmente deber ser robusto a engaños y fraudes.
+
+En la actualidad existen varias formas de reconocimiento biométrico, algunos son de uso comercial, otros incluso consideran que patrones de comportamiento pueden ser criterios para una distinción biométrica (de uso no comercial), incluyendo ambos tenemos los siguientes métodos\cite{delac2004survey}; Termograma Infrarrojo (facial, manos o venas), Forma de caminar, Olor , Estructura de la oreja, Geometría de la mano, Huella digital, Retina, Iris, Palmas, Voz, Firma, DNA y Rostro.
+
+El reconocimiento biométrico del rostro es la forma natural en la que los seres humanos hacemos reconocimiento por este motivo es muy usado como método en varias situaciones. No es intrusivo y es adecuado para varias aplicaciones en el caso de esta tesis su uso para vídeo vigilancia.
+
