@@ -1,85 +1,55 @@
-\documentclass[a4paper,openany,12pt]{book}
-\usepackage{graphicx}
-\usepackage[spanish]{babel}
-\usepackage[utf8]{inputenc}
-%\usepackage[latin1]{inputenc} % acentos sin codigo
-\usepackage{enumerate} % enumerados
+\documentclass[a4paper,12pt,twoside,openright]{book} 
+\input{Includes.tex}
+\input{colors.tex}
 
-
-%\usepackage{algorithm}
-%\usepackage{algpseudocode}
-\selectlanguage{spanish} 
-%\usepackage[spanish,onelanguage]{algorithm2e}
-\usepackage[spanish,onelanguage,linesnumbered,ruled,vlined]{algorithm2e}% para pseudo codigo
-\newcommand{\var}{\texttt}
-
-\usepackage{wrapfig}
-
-\usepackage{multirow}
-\usepackage{amsmath}
-\usepackage{graphicx}
-\graphicspath{ {graficos/} }
-\usepackage{fancyhdr}
-\usepackage{ae}
-\usepackage[left=2.5cm,right=2.5cm,top=3cm,bottom=3cm]{geometry}
-\usepackage[printonlyused]{acronym}
-\usepackage{hlundef}
-\usepackage{tesis}
-\usepackage{breakcites}
-\usepackage{textcomp}
-
-\SetKwFor{For}{para}{hacer}{fine per}
-
+\pagenumbering{Roman} 
 
 \title{Reconocimiento de rostros con \textit{elastic bunch graph matching} y \textit{constrained local neural fields} para vídeo vigilancia}
-
 \author{José Rodrigo Galdos Chávez}
-
-\orientador{\\
-Dr. Juan Carlos Gutiérrez Cáceres}
+\orientador{Dr. Juan Carlos Gutiérrez Cáceres}
+\jurado
+{
+\\ Dr. Guillermo Cámara Chávez  -- Universidade Federal de Ouro Preto  -- Brasil
+\\ Dr. Jorge Poco -- University of Washington -- USA
+\\ Dr. Erick Gomez Nieto -- Universidade de Sao Paulo -- Brasil
+\\ Dr. Alex Cuadros Vargas -- Universidad Católica San Pablo -- Perú
+}
 
 \dedicado{A Dios y a mi Madre por todo lo que me
 han dado.}
-%, a todos los profesores por sus enseñanzas y algunos
-%amigos.}
 
 \begin{document}
-\maketitle
+\maketitle 
 
-%Compone la carátula y la dedicatoria
 
-\input{Agradecimientos} %Inserta los agradecimientos
 \include{abreviaturas}
-\input{Resumen} %Inserta el resumen
-\input{Abstract} %Inserta el abstract
+\input{Agradecimientos}
+\input{Abstract}
+\input{Resumen} 
 
-\tableofcontents %Inserta el índice general
-\listoftables %Inserta el índice de cuadros
-\listoffigures %Inserta el índice de figuras
+\tableofcontents 
+\listoftables 
+\listoffigures 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%   En esta parte deberas incluir los archivos de tu tesis   %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{Cap_1} %Inserta el capítulo 1 Introduccion
-\input{Cap_2}
-\input{Cap_2.5}
-\input{Cap_3}
-\input{Cap_4}
-\input{Cap_5}
-%\input{Conceptos_preliminares} %Inserta el capítulo 2
-%\input{Trabajos_relacionados}%Trabajos relacionados linea de investigación
+\clearpage 
+\pagenumbering{arabic} 
 
-%\input{Propuesta} %Inserta el capítulo 3
-%\input{Resultados} %Inserta el capítulo 4
-%\input{Cap_5} %Inserta el capítulo 4
-%\input{conclusiones} %Inserta el capítulo 5
+
+\input{Cap_1} 
+\input{Cap_2} 
+\input{Cap_3} 
+\input{Cap_4} 
+\input{Cap_5} 
+\input{conclusiones} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \bibliographystyle{apalike}
 \bibliography{Bibliog}
-%\nocite{*}
 \addcontentsline{toc}{chapter}{Bibliografía}
 
 \end{document}

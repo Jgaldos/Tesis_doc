@@ -1,262 +1,358 @@
-\chapter{Propuesta} \label{chap:Propuesta}
-%parrafo de introduccion recordando objetivo
-%La propuesta de este trabajo de tesis consiste en la adopción y adaptación de técnicas y trabajos ya existentes sobre los cuales, realizar las modificaciones que nos permita reconocer rostros en un contexto de vídeo vigilancia.
+\chapter{Marco teórico de la propuesta}\label{chap:Conceptos}
+En este capítulo se presenta todos los conceptos y técnicas usadas para el desarrollo de la propuesta desde las técnicas de detección usadas hasta el proceso de reconocimiento.
 
-La propuesta de este trabajo presenta un \textit{pipeline} de reconocimiento de rostros en vídeo donde se usa \ac{EBGM} que ha sido elegido por sus resultado en comparativas realizadas con otros métodos holísticos, y por ser un método que es considerado biométrico por lo expuesto en los capítulos anteriores.
+\section{Métodos de detección}
 
-Cabe resaltar que la principal dificultad para su uso en vídeo vigilancia es su necesidad de tener las coordenadas de los ojos ya encontradas para poder determinar el resto de puntos fiduciales. Este hecho es especialmente importante ya que el proceso de estimación de puntos esta ligado a que tipos de modelos se usa y puede ser influenciado por algún patrón dentro de los modelos.
-
-%Una problema en el uso de \ac{EBGM} que no se aborda en este trabajo pero es necesario mencionarlo, para tener un sistema de reconocimiento de rostros viable es, el tiempo que se toma en convolucionar las varias Gabor wavelet por punto fiducial tomando en cuenta que en el algoritmo de \cite{bolme2003elastic} se usa 25 puntos y 80 Gabor Wavelet por punto.
-
-A pesar de la dificultad mencionada, \ac{EBGM} sigue siendo un algoritmo adecuado para el reconocimiento de rostros en vídeo vigilancia. Por ello se propone adoptar el uso de \ac{CLNF} para reemplazar el proceso de estimación de puntos fiduciales que \ac{EBGM} usa.
-
-A continuación se presenta el esquema general de la propuesta de este trabajo de tesis.
-
-\section{Esquema general de la propuesta}
-%mostrar y describir las partes del pipe lines de vídeo
-Para poder realizar el reconocimiento de rostros en vídeo vigilancia se debe establecer un \textit{pipeline} de procesos para alcanzar dicha meta, a continuación se describe los pasos necesarios para el reconocimiento de rostros:
-\begin{enumerate} [1.]
-\item Realizar la detección de rostros en la escena de vídeo vigilancia.
-\item Validar dichas detecciones para descarta falsos positivos.
-\item Encontrar puntos fiduciales en el rostro detectado.
-\item Aplicar pre-procesamiento a la imagen de rostros detectada.
-\item Normalizar imágenes de rostros a un tamaño y posición predefinida.
-\item Realizar el proceso de reconocimiento usando \ac{EBGM}.
-\item Mostrar el resultado del reconocimiento
-\end{enumerate}
-En la Figura \ref{im:PropPipeline} se puede observar la lista de procesos o \textit{pipeline} del procedimiento general de la propuesta desde adquisición de la imagen hasta el resultado del reconocimiento.
-\begin{figure}[h]
-\center
-\includegraphics[scale=0.45]{Pipeline}
-\caption{\textit{Pipeline} de propuesta, muestra el proceso de reconocimiento de rostros desde la detección en una escena hasta la muestra del resultado.}
-\label{im:PropPipeline}
-\end{figure}
-
-En el Algoritmo \ref{alg:Propuesta} se describe el funcionamiento de nuestra propuesta donde se trata cada punto relevante:
-
-\begin{algorithm}[]
-%\KwResult{Visualización de rostros reconocidos en vídeo vigilancia}
-%Inicio\;
-\label{alg:Propuesta}
-\var{names} $\gets$ crear lista para almacenar nombres de imágenes de entrenamiento\;
-\var{graphs} $\gets$ crear una lista de \var{FaceGraph}\;
-\var{filter} $\gets$ crear un filtro de puntos fiduciales\;
-\var{clnf\_model} $\gets$ leer y cargar modelo de entrenamiento para \ac{CLNF}\;
-\var{mask} $\gets$ conjunto de mascaras de Gabor a partir de un conjunto con parámetros\;
-\var{trainSet} $\gets$ leer lista de direcciones y nombres de imágenes de entrenamiento\;
-\ForEach{\var{element} en \var{trainSet}}
-{
-	\var{trainIm} $\gets$ leer imagen a partir de \var{element}\;
-    \var{success} $\gets$ buscar puntos fiduciales en \var{trainIm} con \var{clnf\_model}\;
-    \eIf{\var{success} es cierto}
-    {
-    	\var{faceLandmarkTrain} $\gets$ asignar lista de puntos fiduciales encontrados con \var{clnf\_model}\;
-        añadir nombre de la imagen a la lista \var{names}\;
-        \var{graph}$\gets$\textit{ConvertirImagenGrafo}(\var{trainIm},\var{faceLandmarkTrain},\var{mask},\var{filter})\;
-    }
-    {
-    	escribir mensaje de error en entrenamiento\;
-    }
-}
-\If{fuente de vídeo no existe}
-{
-	escribir mensaje de error en fuente de vídeo\;
-    salir de la aplicación\;
-}
-\While{siempre cierto}
-{
-	\var{frame} $\gets$ leer desde fuente de vídeo\;
-    \var{frameGray} $\gets$ convertir \var{frame} a escala de grises\;
-    detectar rostros en \var{frameGray} usando \var{cascade}\;
-    \var{faces} $\gets$ guardar coordenadas de rostros detectados por \var{cascade}\;
-    \ForEach{\var{element} en \var{faces}}
-    {
-    	\var{roi} $\gets$ recortar región de rostro en detectada en \var{frameGray} y validar detección con un detector de \ac{HOG}\;
-        \var{success} $\gets$ buscar puntos fiduciales en \var{roi} con \var{clnf\_model}\;
-    }
-    \If{\var{var} es cierto}
-    {
-    	\var{var} $\gets$ asignar lista de puntos fiduciales encontrados con \var{clnf\_model}\;
-        \var{detectedFace} $\gets$ ConvertirImagenGrafo(\var{roi},\var{faceLandmark},\var{mask},\var{filter})\;
-    }
-    ajustar \var{faceLandmark} a posición real en \var{frame}\;
-    dibujar \var{faceLandmark} en \var{frame}\;
-    dibujar recuadro de \var{roi} en \var{frame}\;
-    \var{name} $\gets$ ReconocerFaceGraph(detectedFace,graphs,names)\;
-    dibujar \var{name} sobre recuadro de \var{roi}\;
-    visualizar \var{frame}\;
-}
-%Fin\;
-\caption{Pipeline de propuesta de reconocimiento de rostros}
-\end{algorithm}
+Es necesario resaltar la importancia de una detección adecuada para el reconocimiento ya que ambos son procesos muy relacionados entre sí. En esta sección se explican tres métodos de detección uno para encontrar rostros, otro para validar los rostros detectados y finalmente uno para encontrar puntos de dentro de los rostros.
 
 
-\section{Detección y validación de rostros} 
-Para el proceso de detección de rostros se utilizó el algoritmo de Viola-Jones, el cual devuelve regiones donde se detectaron rostros, es conocido que dicho algoritmo funciona bien en imágenes de alta resolución y condiciones de iluminación controladas. Como se observa en la Figura \ref{im:ViolaPerfect}, pero en el contexto de imágenes de vídeo vigilancia las cámara tiene menor resolución y no controlan la condiciones de iluminación, motivo por el cual nos da como resultados regiones que no necesariamente corresponden a un rostro (falsos positivos).
+\subsection{Detector de Viola-Jones}\label{scc:Viola}
+El detector de Viola-Jones también conocido como \textit{Haar Detector} en implementaciones libres, se presenta en \cite{viola2001rapid} donde se hace uso de las características Haar (Figura \ref{im:Haar}) en una representación conocida como Imagen Integral, también se utiliza el Algoritmo Ada Boost y un clasificador en casada para completar el proceso de detección.
 
 \begin{figure}[h]
 \center
-\includegraphics[scale=1]{ViolaPerfect}
-\caption{Muestra de una imagen optima detector de Viola-Jones, todos los sujetos observan a la cámara y es una imagen en buena calidad, extraída de Internet}
-\label{im:ViolaPerfect}
+\includegraphics[scale=.5]{Haar}
+\caption{Ejemplo de característica Haar, extraído de \cite{viola2001rapid}. Estos rectángulos pueden ser entendidos como rectángulos en los cuales son determinados como áreas de baja iluminación y otros como áreas de alta iluminación de esta manera podemos representar el contraste entre dos secciones de la imagen,}
+\label{im:Haar}
 \end{figure}
 
-Para que la propuesta sea robusta este trabajo presenta un validación mediante el descriptor de \ac{HOG}, de esta manera se mejora el proceso de detección a la vez de validar los resultados del detector de Viola-Jones. En general mejora la detección de rostros en sistemas de vídeo vigilancia.
+En \cite{viola2001rapid} se explica que el trabajo de detección se basa en tres conceptos:
+\subsubsection{Imagen integral}
+Usa un concepto parecido a una tabla de texturas donde tenemos en cada punto el valor de la suma de los pixeles de arriba y a la derecha de dicho punto. 
 
-\subsection{Detector de Viola-Jones}
+Esto permite el calculo rápido de valor de los pixeles para cualquier sección de la imagen, dicho valor nos ayuda a hacer un calculo rápido del contraste en cualquier sección, lo cual permite el calculo de cualquier característica Haar en tiempo constante.
+\subsubsection{Algoritmo Ada Boost}
+Debido a la existencia de un gran numero de características Haar, aproximadamente más de 45,000 no es posible usar todas en un proceso de clasificación, por lo que es necesario encontrar un conjunto pequeño de características que juntas formen un clasificador efectivo.
 
-El proceso de detección comienza con la transformación de la escena al espacio de imagen integral, como es explicado en la Sección \ref{scc:Viola}. Luego se analiza todas las regiones de la escena a través de una ventana para encontrar patrones de características Haar que cumplan con el entrenamiento del clasificador en cascada, dando como resultado las coordenadas de las regiones con rostros detectados. Este proceso se repite por varios tamaños de ventana diferente para detectar rostros en varios tamaños.
-
-%PONER UNA IMGEN O PIPELINE DEL PROCESO VIOLA 
-
-Como se observa en la Figura \ref{im:EscenaViola} y \ref{im:EscenaViolaResultados}, Viola-Jones tiene problemas en condiciones de iluminación no controladas, y se puede apreciar claramente que hay varios rostros detectados y un falso positivo. Motivo por el cual es necesario validar con el proceso siguiente.
+En \cite{viola2001rapid} se presenta una modificación al algoritmo Ada Boost para seleccionar las mejores características Haar y con ellas entrenar varios clasificadores débiles en términos de su tasa de aciertos, que en combinación permiten obtener un clasificador fuerte. De esta manera tener un clasificado robusto para el proceso de detección.
+\subsubsection{Clasificador en casada}
+La idea tras un clasificador en cascada es organizar todos los clasificadores débiles en un estilo en el cual estén uno detrás de otro como una cascada. Cuando se analiza una región esta pasa por el primer clasificador y sí el resultados es negativo se descarta, pero si resulta positivo pasa al siguiente clasificador hasta el final de la cascada y así sucesivamente de esta manera obtiene un solo clasificador, más robusto que los clasificadores que lo componen. Este proceso se puede apreciar en la Figura \ref{im:cascade}.
 
 \begin{figure}[h]
 \center
-\includegraphics[scale=0.2]{escena_Muestra_error}
-\caption{Muestra de  una escena de vídeo vigilancia usando el detector de Viola-Jones}
-\label{im:EscenaViola}
+\includegraphics[scale=0.75]{cascadeClassifier}
+\caption{Muestra del clasificador en cascada, donde una imagen es analizada por un clasificador tras otro desde el primero hasta el n-esimo si resulta la imagen positiva, extraído de \cite{viola2001rapid}.}
+\label{im:cascade}
 \end{figure}
+
+El detector de Viola-Jones es ampliamente usado y reconocido como un detector que entrega una gran cantidad de verdaderos positivos (detecciones acertadas). Pero es necesario mencionar sus limitaciones y falencias, de la misma manera que entrega un gran porcentaje de verdaderos positivos también entrega falso  positivos (detecciones presentadas como verdaderas pero que no lo son) esto es debido a que el calculo de la imagen integral se hace en la escala de grises a veces alguna configuración de sombras producidas en la imagen genera la misma distribución de contrastes que un rostro humano.
+
+Otro defecto es que solo detecta rostro de frente. No puede detectar otras posiciones del rostro humano simultáneamente. A pesar de estas deficiencia sigue siendo usado no solo para rostros sino para otro tipo de objetos ya que su mayor ventaja es que es entrenarle.
+
+\subsection{Detector de \acf{HOG}}
+Un detector de \acf{HOG} usa una combinación del descriptor de \ac{HOG} y un clasificador basado en \acf{SVM}, originalmente usado para detectar personas \cite{dalal2005histograms}, su uso se ha incrementado a varias situaciones, incluyendo la detección de rostros, a continuación exponemos las ideas detrás de este detector.
+\subsubsection{Descriptor de \ac{HOG}}
+Un descriptor de \ac{HOG} muestra el calculo de la gradiente de una imagen, la gradiente es cambio de la intensidad de la imagen en una cierta dirección, pudiendo ser representado como un vector que posee magnitud $g$ y dirección $\theta$, el calculo del gradiente en una imagen se hace por pixel y retorna la dirección del cambio y su magnitud, este proceso se observa en las siguientes ecuaciones:
+\begin{equation}
+dx=I(x+1,y)-I(x-1,y)
+\end{equation}
+\begin{equation}
+dy=I(x,y+1)-I(x,y-1)
+\end{equation}
+\begin{equation}
+\theta(x,y)=arctan\left(\frac{dy}{dx}\right)
+\end{equation}
+\begin{equation}
+g(x,y)=\sqrt[2]{dx^2+dy^2}
+\end{equation}
+
+Donde $x$ y $y$ son las coordenadas de la imagen y la función $I(x,y)$ es el valor del pixel o intensidad en dichas coordenadas. Luego se divide la imagen en secciones iguales y en cada una de estas secciones se calcula un histograma de las orientaciones para conocer la orientación dominante de cada sección, de esta manera creamos un vector de características.
+
+Con esta información se puede describir el contorno y forma de una figura, lo que es útil para realizar una clasificación.
+
+\subsection{\acf{SVM}}
+Un \ac{SVM} \cite{cortes1995support} es un clasificador lineal en el cual se intenta crear una linea divisoria entre las representación (vectores de características) de ejemplos positivos y negativos de un objeto determinado.
+
+Esta basado en el aprendizaje estadístico para resolver problemas de clasificación de patrones. Los clasificadores lineales se caracterizan porque aprenden una función lineal para separar las clases. No se trata de una agrupación por similitudes, sin que existe una separación definida entre clases.
+
+Dado un conjunto de ejemplos de entrenamiento (muestras) podemos etiquetar las clases y entrenar una SVM para construir un modelo que prediga la clase de una nueva muestra. Intuitivamente, una SVM es un modelo que representa a los puntos de muestra en el espacio, separando las clases por una linea representada por la función del clasificador. Cuando las nuevas muestras se ponen en correspondencia en función de su proximidad, pueden ser clasificadas a una u otra clase, dependiendo de la proximidad a cada una. Mas formalmente, la idea principal de SVM es construir un hiperplano o conjuntos de hiperplanos en un espacio de dimensionalidad muy alta como superficie de decisión, de tal forma que, el margen de separación entre ejemplos positivos y negativos sea el máximo. Una buena separación entre las clases permitirá una clasificación correcta. 
+
+\ac{SVM} resulta ser un clasificador muy robusto y usado, el cual presenta varias modificaciones alrededor del estado del arte.
+
+
+\subsection{\acf{CLNF}}
+\ac{CLNF} es un método para encontrar puntos de interés en imágenes de rostros presentado en \cite{baltrusaitis2013constrained} e implementado para aplicaciones de video en \cite{Baltrusaitis2016} en la presentación de su framework ``Open Face'' para el tracking y detección de rostros, donde publica el código de su propuesta, \ac{CLNF} se basa en \ac{CLM}, por lo tanto empezamos con una explicación de \ac{CLM}.
+
+\ac{CLM} es una forma para localizar un conjunto de puntos restringido por un modelo en una imagen, el proceso consiste en tomar una muestra de una área de la imagen donde se realizó una estimación inicial proyectarla a un marco de referencia. Por cada punto se genera una imagen de respuesta donde se le da una puntuación por tener el punto a localizar en cada pixel. Este puntaje es determinado a través de un detector local que evalúa el punto según un modelo de distribución de puntos en donde penaliza distribuciones complicadas y premia distribuciones simples y mas probables, de esta manera se evalúan todos los puntos en conjunto.
+
+En \cite{baltrusaitis2013constrained} se propone el uso de redes neuronales para los detectores locales de los puntos, con lo cual logra una mejor determinación de puntos en relación con el resto de puntos detectados. Compara sus resultados con otras técnicas del estado del arte así mismo realiza pruebas con imágenes obtenidas de Internet que presentan condiciones no controladas.
+
+\section{Técnicas de pre-procesamiento}
+Como se puede observar en las secciones anteriores un problema en especial difícil es la iluminación, por lo que es necesario hablar sobre las técnicas de pre-procesamiento, se entiende como pre-procesamiento a las técnicas que modifican una imagen para acentuar alguna característica, estas serán usadas para afrontar dicho problema.
+
+\subsection{Ecualización de histograma}
+Las ecualización del histograma de una imagen es una transformación que pretende obtener para una imagen un histograma con una distribución uniforme. Es decir, que exista el mismo número de pixeles para cada nivel de gris del histograma de una imagen monocroma \cite{orlova2002image}.
+La función de la ecualización es:
+\begin{equation}
+h(v)=Redondeo\Bigg(\frac{cdf(v)-cdf_{min}}{(M\times N)-cdf_{min}} \times (L-1)\Bigg)
+\end{equation}
+Donde $cdf_{min}$ es el mínimo valor no nulo de la función de distribución de acumulación. $M\times N$ es el numero de pixeles en la imagen y $L$ es el numero de niveles de la escala de gris.
 
 \begin{figure}[h]
 \center
-\includegraphics[scale=0.79]{pepe}
-\includegraphics[scale=1]{elian}
-\includegraphics[scale=1]{josimar}
-\includegraphics[scale=0.6]{Error}
-\caption{Ejemplo de detecciones usando el detector de Viola-Jones, donde la ultima imagen es un falso positivo}
-\label{im:EscenaViolaResultados}
+\includegraphics[scale=1]{face_original}
+\hspace{1cm}
+\includegraphics[scale=1]{face_he}
+\caption{Ecualización de histograma - Izquierda: imagen en escala de Grises. Derecha: imagen ecualizada.}
+\label{im:he}
 \end{figure}
 
-\subsection{Validación con detector de \ac{HOG}}
-Para filtrar los falsos positivos que puede entregar el algoritmo de Viola-Jones se propone usar el detector de \ac{HOG} para rostros. %esta elección es motivada por dos razones.
 
-El proceso de detección de rostros usando \ac{HOG} toma una imagen y la trasforma con el descriptor de \ac{HOG} donde se resalta las lineas de contraste y entrega información sobre la gradiente de dicho contraste como se observa en la Figura \ref{im:HOG}
-
-\begin{figure}[h]
-\center
-\includegraphics[scale=1.5]{face}
-\includegraphics[scale=0.15]{hog}
-\caption{Muestra de representación del descriptor de \ac{HOG}(derecha) en una imagen de rostro(izquierda), donde el total de la imagen es transformada a un vector de características.}
-\label{im:HOG}
-\end{figure}
-
-%La primera es que es un detector mas robusto pero a la vez más costoso computacionalmente, y mientras en el estado del arte las implementaciones de detectores basados en Viola-Jones optimizadas para tiempos de respuesta menores y trabajos en resoluciones de alta definición, impulsa usar este ultimo como método de detección y al segundo como validador.
-
-%La primera es que el detector de \ac{HOG} analiza las imagenes de manera diferente a al algoritmo de Viola-Jones que busca grandes grupos de contraste,
-
-Para analizar las imágenes representadas por el descriptor de \ac{HOG} se utiliza un \ac{SVM} que se ha sido entrenado con ejemplos positivos y negativos de rostros, con ello se valida los resultados entregados por Viola-Jones vistos en la Figura \ref{im:EscenaViolaResultados}.
-
-Las información proporcionada por el descriptor de \ac{HOG} es entregada a la siguiente parte del proceso como la primera estimación de puntos fiduciales.
-
-%La segunda es que en la continuación de la linea de proceso esta un detector de puntos fiduciales para los rostro detectados, el cual necesita una primera estimación de puntos como lo menciona \cite{baltrusaitis2013constrained} y la representación en el descriptor de \ac{HOG} cumple este trabajo.
-
-\section{Detector de puntos fiduciales}
-A partir de los resultados obtenidos por el proceso de detección y validación se tiene una imagen la cual es utilizado en el calculo de los puntos fiduciales mediante \acf{CLNF}.%necesario estimar las coordenadas de los ojos para iniciar el proceso de detección de puntos fiduciales usado por \ac{EBGM}
-
-%Cabe resaltar que la diferencia del proceso de detección de puntos fiduciales usado por \ac{EBGM}, en el cual se necesitan las coordenadas de los ojos para poder posicionar el promedio los modelos hechos a mano que utiliza, a estos modelos se les extrae características con los Gabor Wavelet que son comparados con cada punto estimado para encontrar a que modelo se parece mas, una vez encontrado a que modelo se parece cada punto, se calcula una diferencia entre desplazamientos ente el punto y el modelo de esta manera ajusta el punto a un lugar mas parecido al modelo de referencia. Este proceso es el punto mas débil de \ac{EBGM} para se usado en vídeo vigilancia, debido a que un error en la entrega de las coordenadas de ojos causa que no se produzca un reconocimiento confiable.
-
-El método de \ac{EBGM} se basa en modelos de rostros, esto modelos son los puntos encontrados manualmente (ojos, nariz, boca, etc) como se observa en la Figura \ref{im:22Landmark}, dichos modelos se obtienen de un conjunto variado de rostros, a partir de los cuales se calcula un modelo promedio, que se utiliza como estimación inicial para un nuevo rostro mediante el alineamiento con el conjunto de modelos en base a las coordenadas de los ojos 
-
-Se extraen características de la nueva imagen en base a las coordenadas de puntos del modelo promedio, y por cada punto se realiza una comparación del Gabor Wavelet en la nueva imagen con su equivalente en todos los modelos, hasta encontrar el punto del modelo con mayor similitud con ello se obtiene la estimación final de los puntos. Este es un proceso de fundamental ya que una mala estimación de los puntos repercute en el proceso de reconocimiento.
-
-Se propone el uso de \acf{CLNF} en reemplazo de todo el proceso detección de puntos usado en \ac{EBGM}, debido a que \ac{CLNF} es un detector robusto y probado en ambiente no controlados, con una buena tolerancia a variaciones de pose.
-
-\ac{CLNF} recibe el resultado del detector de \ac{HOG} y realiza una estimación de puntos, a partir de ahí se restringe cada punto a un área de vecindad donde se aplica una red neuronal que entrega información espacial sobre cuales son las posiciones que tiene mayor probabilidad de ser el verdadero punto a detectar, el resultado de los puntos detectados es evaluado en conjunto para encontrar la configuración de puntos que resulte mas probable en conjunto, de esta manera se eliminan expresiones y formas de rostro poco probables. Finalmente se entrega las posiciones de 68 puntos en el rostro.
-
-%Como parte de la propuesta se utiliza \acf{CLNF} como detector de puntos fiduciales, este es uno de los mayores aportes de la propuesta debido a que \ac{CLNF} realiza la detección a partir de la información producida por el detector anterior, y ya no es necesario el uso de modelos como forma de detección de puntos, que eran el punto débil de \ac{EBGM}, incluso se puede prescindir de toda la parte del algoritmo dedicada a cargar modelos, a estimar puntos a partir del promedio de modelos hechos a mano y el proceso de estimación de nuevos puntos fiduciales.  
-
-Todo ello permite llevar a \ac{EBGM} a un entorno de vídeo vigilancia sin ayuda de un factor humano, lo que antes no era posible. La totalidad de este proceso se puede apreciar en los algoritmos \ref{alg:Propuesta} y \ref{alg:ImToGrph}.
-
-\section{Pre-procesamiento y normalización de imágenes}\label{scc:PropIluminacion}
-
-Una vez el rostro ha sido detectado, validado y con los puntos fiduciales encontrados, a la imagen del rostro se le aplica una mejora en iluminación a través de ecualización de histograma, transformada de logaritmo y transformada discreta de coseno, presentada en el trabajo de Manjula (\cite{manjulaimage}), siendo la siguiente Ecuación \ref{f_normaliza}:
-
+\subsection{Transformada de logaritmo}
+La Transformada de logaritmo asigna un rango estrecho de valores (píxeles en escala de grises o un canal de un espacio de color) de un rango amplio de valores de entrada. La transformada de logaritmos es útil si se necesita expandir los valores de píxeles oscuros de una imagen mientras se comprime los valores altos \cite{thamiz2015liter}
 
 \begin{equation}
-	F(x,y) = c_{1}*DCT + c_{2}*Lg + c_{3}*HE
-    \label{f_normaliza}
+\label{f_log}
+s = c*log(1+ 256*r)
 \end{equation}
-Donde $c_{1}, c_{2}, c_{3}$ son valores tipo peso para equilibrar el efecto de las técnicas usadas, sus valores son de 0.3 , 0.2 y 0.5 respectivamente, donde estos valores fueron calculados después de permutar todos las combinaciones posibles. El resultado de este proceso puede verse en la Figura \ref{im:Preprocess}.
+
+Donde $r$ es la imagen de entrada, $c$ es una constante, $s$ es la imagen mejorada. Para la transformada de logaritmo se utilizo el valor de 20 para la constante $ c $. 
 
 \begin{figure}[h]
 \center
-\includegraphics[scale=1.5]{face_original}
-\includegraphics[scale=1.5]{face_pre}
-\caption{Muestra del pre-procesamiento aplicado a imágenes, comparando antes y después}
-\label{im:Preprocess}
+\includegraphics[scale=1]{face_original}
+\hspace{1cm}
+\includegraphics[scale=1]{face_log}
+\caption{Transformada de logaritmo - Izquierda: imagen en escala de Grises. Derecha: imagen con Transformada de logaritmo.}
+\label{im:log}
 \end{figure}
 
-Junto con ello se aplica el proceso normalización en tamaño que usa \ac{EBGM} que mueve las coordenadas de los ojos a coordenadas pre establecidas $(52, 64)$ y $(76, 64)$ y cambia su resolución a un tamaño de $128 \times 128$ a través de una matriz de transformación de  perspectiva, donde se incluye un borde de 30 pixeles, por lo que el tamaño efectivo de rostros en la imagen final es aproximadamente 90 pixeles de ancho.
+\subsection{Transformada discreta de coseno}
+La transformada Discreta de coseno (DCT por sus siglas en ingles) es utilizada especialmente en el procesamiento de señales e imágenes. DCT expresa en una secuencia finita de puntos, datos en términos de sumas de funciones de coseno en diferentes frecuencias. En el procesamiento de imágenes, la utilización de DCT ayuda a descomponer una imagen en frecuencias, donde usualmente los pequeños componentes de frecuencia altas pueden ser descartados. La ecuación en 2D está dada por la Ecuación. \ref{f_dct}
+\cite{thamiz2015liter}\cite{vish2015ill}
 
-Se mantiene la resolución del algoritmo original de \cite{bolme2003elastic} debido a que es necesario aproximarse a resoluciones de rostros que se pueden encontrar en vídeos de vigilancia.
-Este proceso y el descrito en la siguiente sección puede ser observado en el algoritmo \ref{alg:ImToGrph}
+\begin{equation}
+	\label{f_dct}
+	\resizebox{0.91\hsize}{!}{
+		$ C(u,v) = \alpha(u)\alpha(v)\sum\limits_{x=0}^{N-1} \sum\limits_{y=0}^{N-1}f(x,y)cos\left[\frac{\pi(2x + 1)u}{2N}\right]cos\left[\frac{\pi(2y + 1)v}{2N}\right] $
+	}
+\end{equation}
 
-\begin{algorithm}[h]
-\label{alg:ImToGrph}
-\SetKwFunction{ImToGrph}{\textit{ConvertirImagenGrafo}}
-\ImToGrph{\var{image},\var{faceLandmark},\var{mask},\var{filter}}\;
-{
-\var{source} $\gets$ extraer coordenadas de ojos de \var{faceLandmark}\;
-\var{M} $\gets$ Calcular una matriz de transformación de perspectiva para que las coordenadas de \var{source} correspondan a las coordenadas $(52,64)$ y $(76,64)$,  y el tamaño de la imagen sea cambiado a $128 \times 128$\;
-\var{geo} $\gets$ aplicar la matriz de transformación \var{M} a \var{image}\;
-\var{geo} $\gets$ aplicar mejora de iluminación\;
-\var{faceLandmark} $\gets$ usar \var{filter} para filtrar puntos fiduciales de interés\;
-\var{graph} $\gets$ generar grafo de puntos a partir de \var{faceLandmark}\;
-\var{graph} $\gets$ aplicar la matriz de transformación \var{M} a coordenadas de vértices de \var{graph}\;
-\ForEach{\var{vertice} en \var{graph}}
-{
-	extraer Gabor Jet de las coordenadas del vértice usando el conjunto de mascaras de Gabor incluidas en \var{mask}\;
-    Almacenar Gabor Jet dentro de \var{graph} en relación con \var{vertice}\;
-}
-\Return \var{graph}\;
-}
+Donde: $u$, $v$, $N$, $\alpha(u)$ y $\alpha(v)$ se definen de igual forma que la ecuación 1D. La ecuación inversa está definida por la Ecuación. \ref{f_idct}.
 
-\caption{Función para convertir una imagen a Face Graph}
-\end{algorithm}
+\begin{equation}
+	\label{f_idct}
+	\resizebox{0.91\hsize}{!}{
+		$ f(x,y) = \sum\limits_{x=0}^{N-1}\sum\limits_{y=0}^{N-1} \alpha(u)\alpha(v)C(u,v)cos\left[\frac{\pi(2x + 1)u}{2N}\right]cos\left[\frac{\pi(2y + 1)v}{2N}\right]$
+	}
+\end{equation}
 
-\section{Filtro y reajuste de puntos detectados}
-Mientras que \ac{EBGM} propuesto en \cite{bolme2003elastic} funciona con 25 puntos fiduciales, de los cuales 3 de ellos se refieren al cabello, usando el detector de puntos \ac{CLNF} se determina 68 puntos de los cuales muchos son cercanos unos a otros por lo que extraer características en todos ellos resulta redundante, ademas ninguno de los puntos obtenidos a través de \ac{CLNF} corresponden a los 3 puntos que se refieren al cabello.
+El resultado de la transformada de coseno, es una matriz de coeficientes positivos y negativos, los cuales representan la adición o resta de una determinada frecuencia para generar la imagen procesada por la transformada discreta de Coseno.
 
-Por lo que es necesario un filtrado de puntos para realizar una correspondencia con los puntos con los que trabaja \ac{EBGM}, por ello se deja de trabajar con estos 3 puntos fiduciales, siendo la cantidad efectiva de trabajo reducida de 25 a 22 puntos, Figura \ref{im:22Landmark}.
+%parrafo para dar conclusion a la seccion
+Se ha expuesto tres técnicas de pre-procesamiento que serán usadas en usadas en la propuesta del Capítulo \ref{chap:Propuesta}, todas abordan el problema de la iluminación de manera diferente, es necesario tener en cuenta que este problema ha sido tratado mucho en el estado del arte pero aun no se encuentra una técnica de mejora de iluminación sea robusta en cualquier escenario.
+
+%En la siguiente sección se expone los métodos de detección usados como parte de nuestra propuesta. Se explica su funcionamiento y su posición en el estado del arte.
+
+
+\section{\acf{EBGM}}\label{scc::EBGM}
+%Después de haber tratado los métodos de pre-procesamiento, finalmente se expone las técnica de reconocimiento de rostro que en el Capítulo \ref{chap:Propuesta} se presenta una modificación.
+
+\ac{EBGM} presentado en \cite{wiskott1997face} se basa en el concepto que las imágenes de los rostros reales tienen muchas características no lineales que no son abordadas por los métodos de reconocimiento holísticos, tales como variaciones en la iluminación, pose y expresión.
+También se apoya en el argumento que las características visuales que se basan en Gabor Wavelet, han probado ser un buen modelo del procesamiento visual temprano en el cerebro, más precisamente células simples en la corteza visual primaria, por ello también se considera un algoritmo inspiración biológica.
+
+Para ello, una transformación de Gabor wavelet crea una arquitectura de enlaces dinámicos que proyecta el rostro en una malla elástica que es conocida como Face Graph.
+El Gabor Jet es un nodo en la malla elástica, el cual describe el comportamiento alrededor de un pixel. Esto es el resultado de la convolución de una imagen con varias máscaras de Gabor, el cual es usado para detectar formas y extraer características.
+
+El reconocimiento esta basado en la similaridad de la respuesta mascara de Gabor a cada nodo. La dificultad con este método es el requerimiento de marcar puntos precisos en los rostros.
+
+A continuación se explica en detalle su funcionamiento
+
+\subsection{Gabor Wavelet}\label{sscc:GaborWavelet}
+Las Gabor Wavelet son funciones que modifican las imágenes en el espacio de las frecuencias. El espacio de las frecuencia esta estrechamente relacionado al análisis de Fourier, por lo que es necesario hacer una breve descripción.
+
+Una transformada de Fourier descompone una señal de tal manera que pueda ser representada como una combinación de sinusoidales. Cuando se procesa señales como lo pueden ser las imágenes, son representadas como una longitud de onda, ello es muy útil ya que revela información que no puede ser vista cuando observamos la imagen original.
+
+Mientras una señal es un función en base al tiempo, la transformada de Fourier es una función en base a la frecuencia, se puede observar la transformada de Fourier en una dimensión en la siguiente ecuación:
+
+\begin{equation}
+F(x(t))(\omega)=\int_{-\infty }^{\infty } x(t)e^{-i\omega t}dt
+\end{equation}
+
+En la transformada de Fourier y en los Gabor Wavelet la función comprende una parte imaginaria y una real:
+
+\begin{equation}
+F(x(t))(\omega)=\int_{-\infty }^{\infty } x(t)cos(\omega t)dt - i\int_{-\infty }^{\infty } x(t)sen(\omega t)dt
+\end{equation}
+
+Cuando una transformada de Fourier se aplica una frecuencia en particular el resultado es un numero complejo que corresponde a la amplitud del coseno y del seno de la función original, en cada frecuencia hay un componte real y otro imaginario.
+
+Las Gabor Wavelet son como la transformada de Fourier solo que tiene un alcance limitado, básicamente son una sinusoidal multiplicada por una Gaussiana.
+
+Cuando una función es convolucionada con un Gabor Wavelet la información más cerca al centro de la campana de la Gaussiana es la que es tomada en cuenta mientras la más lejana es ignorada.
+
+La ecuación de una de una Gabor Wavelet es la siguiente:
+\begin{equation}
+W(t,t_0,\omega)=e^{-\sigma(t-t_0)^2} e^{--i\omega(t-t_0)}
+\end{equation}
+y su convolucion es:
+\begin{equation}
+C(x(t))(t_0,\omega)=\int_{-\infty}^{\infty}x(t)W(t,t_0,\omega)dt
+\end{equation}
+
+De la misma manera que Fourier produce una resultado complejo un Gabor Wavelet produce:
+\begin{equation}
+C(x(t))(t_0,\omega)=a_{real}+ia_{imag}
+\label{ec:ConvolucionWavelet}
+\end{equation}
+
+Mientras las ecuaciones presentadas hasta ahora trabajan en una dimensión es necesario presentar una forma en la que se pueda trabajar en dos dimensiones, esta es la representación del Gabor Wavelet como mascara para una convoluciónn en imágenes.
+
+La Ecuación \ref{GaborWavelet} define como crear una máscara de Gabor donde $x, y$ son las posiciones en la mascara, para cualquier tamaño de mascara.
+%El Gabor Jet es un nodo en la malla elástica, el cual describe el comportamiento alrededor de un pixel. Esto es el resultado de la convolución de un pixel de la imagen con varios Gabor wavelet o máscaras de Gabor, los cuales son usados para detectar formas y extraer características.
+
+\begin{equation}
+W(x,y,\theta,\lambda, \phi, \sigma, \gamma )=e^{-\frac{x'^2+\gamma y'^2}{2 \sigma^2}}cos(2\pi \frac{x'}{\lambda}+\phi) 
+\label{GaborWavelet}
+\end{equation}
+\begin{equation*}
+x'=cos\theta+ysin\theta   
+\label{GaborWaveletx}
+\end{equation*}
+\begin{equation*}
+y'=-x sin\theta+ycos\theta
+\label{GaborWavelety}
+\end{equation*}
+Los parámetros usados para la construcción de los Gabor wavelet son los mismo que se utilizan en la implementación de \cite{bolme2003elastic}, a continuación los explicamos brevemente:
+\begin{itemize}
+\item $\theta$ especifica la orientación del Gabor Wavelet.\\
+Siendo $\theta \in \left\{0,\pi/8,2\pi/8,3\pi/8,4\pi/8,5\pi/8,6\pi/8,7\pi/8 \right\}$
+\item $\lambda$ especifica el ancho de onda de la función seno, empieza con 4 pixeles y aumenta en medias octavas siendo $\lambda \in \left\{4,4\sqrt{2},8,8\sqrt{2},16\right\} $
+\item $\phi$ especifica la fase de la función seno, pudiendo ser par e impar que representa la parte imaginaria y la parte real del wavelet respectivamente.
+Siendo $\left\{0,\pi/2\right\}$
+\item $\delta$ especifica el radio de la Gaussiana. En este caso $\delta=\lambda$.
+\item $\gamma$ especifica el ratio de aspecto de la Gaussiana. Este parámetro es incluido para que el Wavelet se aproxime a ciertos modelos biológicos. Siendo $\gamma=1$.
+\end{itemize}
+
+
+De esta manera podemos crear varios tamaños de máscaras que en la configuración original son $N \in \left\{25, 37, 51, 71, 101 \right\}$. Dando 80 configuraciones de Gabor wavelet y siendo efectivas 40 máscaras por punto, debido a que existe una mascara que extraer la parte imaginara y otra la parte real del Wavelet.
+%buscar imagen de las mascaras
+
+Al conjunto coeficientes (reales e imaginarios) producidos por estas mascaras de Gabor son llamados Gabor Jet que son el corazón de todo el proceso de reconocimiento de \ac{EBGM}.
+
+A continuación se explica como es el proceso por el cual \ac{EBGM} determina en que puntos de una imagen va extraer características. A estos punto se les conocen como puntos fiduciales.
+
+\subsection{Localización de puntos fiduciales}
+Como se menciona en la sección anterior la convolución del conjunto de mascaras de Gabor sobre un punto produce un Gabor Jet que es un conjunto de coeficientes.
 
 \begin{figure}[h]
 \center
-\includegraphics[scale=0.06]{landmarkPoints}
-\includegraphics[scale=0.45]{FiltroDespues}
-\caption{Izquierda:untos fiduciales entregados por \ac{CLNF}, extraído del proyecto ``Open Face''. Derecah: Puntos fiduciales después del proceso de filtrado}
-\label{im:22Landmark}
+\includegraphics[scale=1.5]{Points}
+\caption{Muestra de los puntos fiduciales elegidos en \ac{EBGM}\cite{bolme2003elastic}, en cada punto se realiza 40 convoluciones con máscaras de Gabor para crear un Gabor Jet por punto}
+\label{im:puntos}
 \end{figure}
 
-Después del filtrado toda la información se completa a un grafo y se aplica una transformada de perspectiva obtenida en el paso anterior para que los vértices correspondan a la imagen normalizada y se continua el proceso de extracción de características de \ac{EBGM}.{}
+Siguiendo el trabajo de \cite{wiskott1997face}, Bolme realiza una implementación de código libre de todo el algoritmo y da un mayor detalle de su funcionamiento, listando que puntos de interés debemos encontrar en una imagen. Estos puntos son conocidos como puntos fiduciales, en el Cuadro \ref{ta:PuntosFiduciales} se puede observar una lista de ellos, y en la Figura \ref{im:puntos} se puede ver su localización.
 
-\section{Proceso de \ac{EBGM}}
-Después de reemplazar el proceso de localización de puntos, se continua con el proceso de reconocimiento explicado en la Sección \ref{scc::EBGM} el cual se puede entender en el Algoritmo \ref{alg:ImToGrph}. El proceso empiza cuando extraen características de los puntos fiduciales a través de las convoluciones con las mascaras de Gabor, donde el grupo de coeficientes de resultado son almacenados en una estructura tipo grafo.
+\begin{table}[h]
+\centering
+\caption{Lista de puntos fiduciales presentada en \cite{bolme2003elastic}}
+\label{ta:PuntosFiduciales}
+\begin{tabular}{|l|l|}
+\hline
+1. Ojo izquierdo                          & 2. Ojo derecho                          \\ \hline
+3. Centro del puente de la nariz          & 4. Pico de la ceja izquierda            \\ \hline
+5. Pico de la ceja derecha                & 6. Interior de la ceja izquierda        \\ \hline
+7. Interior de la ceja derecha            & 8. Exterior de la ceja izquierda        \\ \hline
+9. Exterior de la ceja derecha            & 10. Centro de la punta de la nariz      \\ \hline
+11. Centro de la base de la nariz         & 12. Izquierda de la base de la nariz    \\ \hline
+13. Derecha de la base de la nariz        & 14. Centro parte superior boca          \\ \hline
+15. Centro parte inferior boca            & 16. Esquina izquierda de la boca        \\ \hline
+17. Esquina derecha de la boca            & 18. Parte central del tope de la cabeza \\ \hline
+19. Parte izquierda del tope de la cabeza & 20. Parte derecha del tope de la cabeza \\ \hline
+21. Costado izquierdo del rostro          & 22. Costado derecho del rostro          \\ \hline
+23. Centro de la barbilla                 & 24. Quijada izquierda                   \\ \hline
+25. Quijada derecha                       &                                         \\ \hline
+\end{tabular}
+\end{table}
 
-Finalmente cada imagen representada como un grafo que es comparada con las imágenes de entrenamiento en una comparación una a uno usando las Ecuaciones \ref{FaceGraphSimiFunc} y \ref{GaborJetSimiFunc}, y eligiendo al grafo con el cual posee mayor similitud. Este proceso es descrito en el Algoritmo \ref{alg:RecFaceGrph}.
+El método por el cual \ac{EBGM} encuentra los puntos fiduciales es a través del uso de moldes, imágenes en  las cuales los puntos han sido encontrados manualmente. En los trabajos de \cite{wiskott1997face} y \cite{bolme2003elastic} utilizan 70 imágenes normalizada a un mismo tamaño y donde las coordenadas de los ojos son las mismas.
 
-Una vez obtenido un resultado de reconocimiento este es visualizado mostrado el nombre del sujeto reconocido sobre el área de su rostro detectado.
+Sobre cada imagen de molde y en cada punto marcado se realiza las convoluciones de las mascaras de Gabor para producir un Gabor Jet, de esta manera todos los puntos en todas las imágenes tienen un Gabor Jet. Finalmente todos los Gabor de un punto, por ejemplo el ojo izquierdo, son reunidos en un solo grafo conocido como Bucnh Graph que contiene todos los Gabor Jet de los modelos.
 
-\begin{algorithm}
-\label{alg:RecFaceGrph}
-\SetKwFunction{RecFaceGrph}{\textit{ReconocerFaceGraph}}
-\RecFaceGrph{\var{faceGraph},\var{graphs}, \var{names}}\;
-\var{menor} $\gets$ 10\;
-\For{\var{i} $\gets$ 0, \var{i}< tamaño de \var{graphs}}
-{
-	\var{distance} $\gets$ medir similitud entre \var{faceGraph} y \var{$graphs_{[i]}$}\;
-    \If{\var{distance}<\var{menor}}
-    {
-    	\var{name} $\gets$ \var{$names{[i]}$}\;
-    }
-}
-\Return{name}\;
-\caption{Función para comparar un Face Graph con el conjunto de Face Graph de entrenamiento}
-\end{algorithm}
+De esta manera se obtiene un modelo general con información de todos los modelos, también contiene la información de coordenada de cada punto en cada modelo y un punto de coordenada promedio.
+
+Para reconocer una nueva imagen se realiza una normalización de tamaño y una traslación coordenadas de los ojos a coordenadas preestablecidas a través de una transformación matricial. Mediante un alineamiento entre las coordenadas normalizadas de los ojos y las coordenadas de los ojos del Bunch Graph se encuentran el resto de los puntos fiduciales en la imagen usando la información de coordenada promedio almacenada en el Bunch Graph. Finalmente se encuentra la posición final del punto usando como referencia el Gabor Jet con mayor similaridad en el Bunch Graph
+
+Según \cite{bolme2003elastic} y \cite{wiskott1997face}, y como se menciona en la sección anterior el resultado de una transformada de Fourier en una función y en una frecuencia determinada es un numero complejo, que tiene una correspondencia en amplitud en términos de senos y cosenos que pueden ser representada como una coordenada polar.
+\begin{equation}
+x_{\omega}(t)=a_{\omega,r}cos(t)+a_{\omega,i}sin(t)= a cos(t+\phi).
+\label{ec:CorrepondeciaAPolar}
+\end{equation}
+Es posible representar las suma de las sinusoidales como una función coseno dándole una amplitud y fase especifica.
+Esto sucede cuando las sinusoidales son multiplicadas por una Gaussiana como se observa en la Ecuación \ref{ec:ConvolucionWavelet} y según lo visto en la Ecuación \ref{ec:CorrepondeciaAPolar} se puede representar los coeficientes complejos del resultado de las convoluciones como coordenadas polares de magnitud $a$ y un angulo $\phi$
+\begin{equation}
+a_{real} = a cos\phi 
+\end{equation}
+\begin{equation}
+ a_{imag} = a sen\phi 
+\end{equation}
+y podemos halla $a$ y $\phi$ mediante:
+\begin{equation}
+a = \sqrt{a^2_{real}+a^2_{imag}}
+\end{equation}
+\begin{equation}
+\phi=\left\{\begin{matrix}
+arctan(a_{imag}/a_{real}) & \textrm{si } a_{real}>0 \\ 
+\pi+arctan(a_{imag}/a_{real}) & \textrm{si } a_{real}<0 \\ 
+\pi/2 & \textrm{si } a_{real}=0 \textrm{ y } a_{imag}>= 0 \\ 
+-\pi/2 & \textrm{si } a_{real}=0 \textrm{ y } a_{imag}<0
+\end{matrix}\right.
+\end{equation}
+Gracias a esta transformación a coordenadas polares podemos representar la información compleja del resultado de la convolucion de una mascar de Gabor. 
+%Existe una relación entre el desplazamiento de tiempo en frecuencia y el angulo de la fase del coeficiente. Sí los coeficientes de dos puntos separados por un pequeño desplazamiento son calculados, la diferencia entre el angulo de la fase de dichos puntos debe ser proporcional al desplazamiento entre dichos puntos.
+
+%De esta manera solo se convolusiona el punto una vez, cuando se hace la estimacion inicial y se elige el Gabor Jet mas parecido del Bunch Graph y sobre el se calcula el desplazamiento así para calcular la posición final del punto fiducial, este proceso es el que le da el nombre de \textit{elastic} a \ac{EBGM}.
+
+Cabe mencionar que la mayor debilidad del algoritmo yace en este proceso ya que si el alineamiento del grafo falla por culpa de un error en las coordenadas de los ojos el resto de las estimaciones iniciales falla. % y a pesar de tener una función para el calculo de desplazamiento está limitada a pequeños desplazamientos y búsquedas locales ya que no es practico que haga las estimación a lo largo de grande porciones de la imagen.
+Otra dificultad que presenta es la dependencia a sus modelos, esto quiere decir que por ejemplo si entre sus modelos no se encuentra alguien con barba cuando se intente encontrar puntos en nueva imagen de una persona con barba no va existir ningún Gabor Jet en el Bunch Graph que sea una buena referencia para el ajuste de la posición final del punto.
+
+Finalmente es necesario contar con las coordenadas de ojos de antemano, este hecho por simple que parezca es una de las limitaciones para que \ac{EBGM} se pueda usar en un sistema de reconocimiento de rostro automatizado sobre todo en vídeo vigilancia donde encontrar ojos es difícil.
+
+\subsection{Face Graph}
+Una vez hallada la posición final de los puntos se extrae los coeficientes finales (la representación en coordenadas polares de la convolucion) para los Gabor Jet donde se almacenan una estructura que se conoce como Face Graph. A pesar que en la literatura se representa como un grafo , Figura \ref{im:FaceGraph} , Un Face Graph en realidad es un vector de características.
+\begin{figure}[h]
+\center
+\includegraphics[scale=0.9]{BunchGraph}
+\caption{Representación de Face Graph presentada en \cite{wiskott1997face} }
+\label{im:FaceGraph}
+\end{figure}
+
+Al final solo se hace una comparación punto a punto entre dos Face Graph para el proceso de reconocimiento.
+
+\subsection{Función de similitud}
+El proceso de reconocimiento se lleva a cabo mediante una función de similitud que compara cuan iguales son dos Face Graph, dicha función se expresa de la siguiente forma:
+\begin{equation}
+\label{FaceGraphSimiFunc}
+L_{jet}(G,G')=\frac{1}{N}\sum_{i=0}^{N}S(J_{i},J'_{i})
+\end{equation}
+Donde $N$ es el numero de puntos fiduciales y $J_i,J'_i$ son los i-ésimos Gabor Jet que pertenecen respectivamente a los Face Graph $G,G'$ que van a ser comparados.
+
+La función de similitud entre dos Gabor Jet es la siguiente:
+\begin{equation}
+\label{GaborJetSimiFunc}
+S(J,J')=\frac{\sum_{j=1}^{N}a_j a'_jcos(\phi_j-\phi'_j)}{\sqrt{\sum_{j=1}^{N}a_j^2 \sum_{j=1}^{N}{a'}_j^2}}
+\end{equation}
+
+%escribir un parrafo sobre la comparacion de givens
+Después de explicar el funcionamiento de \ac{EBGM} es necesario mencionar las situaciones donde tiene problemas para funcionar, según \cite{givens2004features} en su estudio comparativo con \ac{PCA} donde explica varias pruebas. Cuando hay cambios bruscos de expresión, cambio de los ojos y boca, y ojos cerrados son las situaciones en las cuales \ac{EBGM} tiene problemas para realizar el reconocimiento, finalmente concluye que dichos problemas tienen en parte relación con el hecho que se necesita las coordenadas de los ojos para empezar el reconocimiento y las dificultades relacionadas para encontrar dichas posiciones afectan el desempeño del algoritmo.
+
+%parrafo para terminar la seccion
+En esta sección se explicó el funcionamiento de \ac{EBGM} que extrae característica de partes bien definidas del rostros, que también son conocidas como características biométricas.
+
+%En un contexto de vídeo vigilancia no solo hace falta elegir un método de reconocimiento de rostros, también en necesario establecer que características van a ser medidas y como ellas van a ser identificadas por ello es necesario explicar el concepto de reconocimiento biométrico.
 
 \section{Consideraciones finales}
-El aporte de la propuesta es todo el \textit{pipeline} donde se ha logrado aplicar \ac{EBGM} para su uso de vídeo vigilancia gracias al uso de una de las ultimas propuestas en una linea de investigación para el reconocimiento de puntos de interés (\ac{CLNF}), donde el detalle de toda la propuesta puede observarse en la Figura \ref{im:PropPipeline}. 
+En este capítulo se ha expuesto todos los métodos que interviene en alguna u otra forma en la propuesta, se ha presentado una introducción a cada una de ellos.
 
-Se resalta el uso de mejoras para la iluminación usando una unión de varios procesos conocidos, así mismo las transformaciones de tamaño sobre el rostro detectado para poder aproximarnos a resoluciones que son comunes en este escenario particular.
+Es necesario resaltar que \ac{EBGM} es un método de reconocimiento biométrico, que se refiere a una forma de reconocimiento basado en un vector de características que derivan mayormente de características biológicas, se considera mucho mas confiable que otros métodos de reconocimiento que usan claves, contraseñas, tarjetas, etc \cite{alice2003biometric}. Esto se debe a cumple con los requerimientos necesarios para ser considerado como tal siendo estos los siguientes:
 
-Se realizaron varias pruebas para llegar a la propuesta final, muchas de las cuales demuestran las dificultades que presenta en el reconocimiento de rostros en vídeo vigilancia y la imposibilidad de usar algunas técnicas en este contexto
+\begin{itemize}
+\item Universalidad.- Toda persona debe tener dicha característica.
+\item Distintividad.- Cualquier par de personas debe ser diferente en términos de dicha característica
+\item Permanencia.-La característica debe ser lo suficientemente invariable a lo largo del tiempo para que pueda ser usada como criterio de comparación.
+\item Medible.-La característica debe ser cuantitativamente mensurable.
+\end{itemize}
+
+Por ello es adecuado su uso para un escenario de vídeo vigilancia en el cual se aplica la propuesta presentada en el siguiente capítulo.
+
