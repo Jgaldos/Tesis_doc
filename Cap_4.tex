@@ -52,8 +52,6 @@ En el Algoritmo \ref{alg:Propuesta} se describe el funcionamiento de nuestra pro
     	escribir mensaje de error en entrenamiento\;
     }
 }
-\var{cascade} $\gets$ entrenar un clasificador basado en el algoritmo de Viola-Jones\;
-\var{frame} $\gets$ leer \textit{frame} de vídeo de fuente\;
 \If{fuente de vídeo no existe}
 {
 	escribir mensaje de error en fuente de vídeo y salir de la aplicación\;
@@ -61,11 +59,6 @@ En el Algoritmo \ref{alg:Propuesta} se describe el funcionamiento de nuestra pro
 \While{siempre cierto}
 {
 	\var{frame} $\gets$ leer desde fuente de vídeo\;
-    \If{\var{frame} esta vacío}
-    {
-    	escribir mensaje de error\;
-        salir de la aplicación\;
-    }
     \var{frameGray} $\gets$ convertir \var{frame} a escala de grises\;
     detectar rostros en \var{frameGray} usando \var{cascade}\;
     \var{faces} $\gets$ guardar coordenadas de rostros detectados por \var{cascade}\;
@@ -207,19 +200,13 @@ Este proceso y el descrito en la siguiente sección puede ser observado en el al
 \section{Filtro y reajuste de puntos detectados}
 Mientras que \ac{EBGM} propuesto en \cite{bolme2003elastic} funciona con 25 puntos fiduciales, de los cuales 3 de ellos se refieren al cabello, usando el detector de puntos \ac{CLNF} se determina 68 puntos de los cuales muchos son cercanos unos a otros por lo que extraer características en todos ellos resulta redundante, ademas ninguno de los puntos obtenidos a través de \ac{CLNF} corresponden a los 3 puntos que se refieren al cabello.
 
-\begin{figure}[h]
-\center
-\includegraphics[scale=0.12]{landmarkPoints}
-\caption{Puntos fiduciales entregados por \ac{CLNF}, extraído del proyecto ``Open Face''}
-\label{im:68Landmark}
-\end{figure}
-
 Por lo que es necesario un filtrado de puntos para realizar una correspondencia con los puntos con los que trabaja \ac{EBGM}, por ello se deja de trabajar con estos 3 puntos fiduciales, siendo la cantidad efectiva de trabajo reducida de 25 a 22 puntos, Figura \ref{im:22Landmark}.
 
 \begin{figure}[h]
 \center
-\includegraphics[scale=0.9]{FiltroDespues}
-\caption{Puntos fiduciales después del proceso de filtrado}
+\includegraphics[scale=0.06]{landmarkPoints}
+\includegraphics[scale=0.45]{FiltroDespues}
+\caption{Izquierda:untos fiduciales entregados por \ac{CLNF}, extraído del proyecto ``Open Face''. Derecah: Puntos fiduciales después del proceso de filtrado}
 \label{im:22Landmark}
 \end{figure}
 

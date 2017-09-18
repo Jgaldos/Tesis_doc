@@ -79,8 +79,8 @@ En esta sección se ha descrito ejemplos de métodos holísticos de diferentes c
 
 En todos ellos no sabemos que características estamos midiendo, en contraste con la  próxima sección donde presentamos un método basado en características.
 
-\section{Métodos basados en modelos y características}
-Un enfoque para abordar el reconocimiento de rostros es mediante el uso de modelos para poder hallar características locales las cuales son pueden se ponderadas para hallar una respuesta al reconocimiento de rostros. A continuación mencionamos algunos métodos que usan este enfoque.
+\section{Basados en modelos y características}
+Un enfoque para abordar el reconocimiento de rostros es mediante el uso de modelos para poder hallar características locales las cuales son pueden se ponderadas para hallar una respuesta al reconocimiento de rostros. A continuación mencionamos:
 
 \subsection{3-D Morphable Model}
 3-D \textit{Morphable Model} se utilizan para el análisis de rostros debido a las propiedades intrínsecas de los rostros en 3D que proporcionan una representación que es inmune a las variaciones intra-personales como la pose y la iluminación. 
@@ -95,15 +95,15 @@ En \cite{huang2003component} dada una imagen de entrada facial individual, un 3-
 
 %El reconocimiento se realiza a partir de comparaciones entre grafos para medir su parecido. Este método de reconocimiento es ampliado en la sección \ref{scc::EBGM}.
 
-\section{Métodos basados en redes neuronales}
+\section{Basados en redes neuronales}
 
 La idea básica del uso de una red neuronal es adaptar la red con una entrada para cada pixel, pero como esto es una solución poco practica debido a la gran cantidad de pixeles, una solución es modificar los datos de entrada de la red a través de alguna técnica de reducción de dimensionalidad o algún método de extracción de características.
 
-Una propuesta del uso de redes neuronales es Cottrel\cite{cottrell1990face}  donde se utiliza dos redes perceptron multicapa con \textit{back propagration} donde la primera capa trabaja en modo auto asociado extrayendo características para la segunda capa donde se realiza la clasificación. Es propuesto como un método para reconocer una gran cantidad de imágenes pero el autor menciona que inclusive en buenas condiciones no mejora el desempeño en comparación a \ac{PCA}.
+Una propuesta del uso de redes neuronales es \cite{cottrell1990face}  donde se utiliza dos redes perceptron multicapa con \textit{back propagration} donde la primera capa trabaja en modo auto asociado extrayendo características para la segunda capa donde se realiza la clasificación. Es propuesto como un método para reconocer una gran cantidad de imágenes pero el autor menciona que inclusive en buenas condiciones no mejora el desempeño en comparación a \ac{PCA}.
 
 Otro método de reconocimiento de rostros automatizado es presentado por \cite{lin1997face}, donde utiliza una red neuronal que se basa en la toma de decisiones probabilísticas \ac{PDBNN}, consta de tres módulos, detector de rostros, detector de ojos, y reconocedor de rostros. Este método se diferencia de otros porque utiliza la zona de la cara que contiene las cejas los ojos y la nariz, pero no la boca. La boca no se considera por que presenta muchas variaciones por el cambio de expresión facial, por lo que al fin de lograr un método robusto a cambios de expresión se descarto esa zona.
 
-Las \ac{PDBNN} tienen una característica única, que es su estructura modular. Es decir, para que se reconozca cada clase, el PDBNN dedica una de sus sub-redes para la representación de esta clase. En comparación con la mayoría de los sistemas de reconocimiento multi-clase utilizando una función de discriminar entre dos clases, tiene \ac{PDBNN} una menor tasa de falsas alarmas / rechazo debido a que sus funciones discriminantes obedecen a una restricción probabilística.
+Las \acf{PDBNN} tienen una característica única, que es su estructura modular. Es decir, para que se reconozca cada clase, el \ac{PDBNN} dedica una de sus sub-redes para la representación de esta clase. En comparación con la mayoría de los sistemas de reconocimiento multi-clase utilizando una función de discriminar entre dos clases, tiene \ac{PDBNN} una menor tasa de falsas alarmas-rechazo debido a que sus funciones discriminantes obedecen a una restricción probabilística.
 
 En \cite{er2002face} se  presentó un método holístico para el reconocimiento facial, donde las características se extraen con \ac{PCA} y se utilizan como entrada para una red neuronal \ac{RBF}. Las redes \ac{RBF} tienen un buen rendimiento para los problemas de reconocimiento, tienen topología compacta y el aprendizaje es rápido. Además de las tareas de reconocimiento de rostro tradicionales  (identificación y verificación de la identidad) las redes neuronales se han utilizado para diversas tareas, tales como la identificación de género y el reconocimiento de expresiones faciales. 
 

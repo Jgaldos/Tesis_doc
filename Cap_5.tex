@@ -17,7 +17,7 @@ Cuenta con diez imágenes diferentes por cada uno de los 40 sujetos que componen
     \label{Att}
 \end{figure}
 \subsection{Yale A}
-Esta base de datos(\cite{georghiades1997yale}) contiene 165 imágenes en escala de grises en formato GIF de 15 individuos. Hay 11 imágenes por sujeto, una por cada diferente expresión facial o cambio de iluminación: iluminación central , con gafas, feliz, iluminación izquierda, sin gafas ,expresión normal , iluminación derecha , triste , somnoliento , sorprendido , y guiño. Algunas de estas configuraciones pueden apreciarse en la imagen \ref{Yale}
+Esta base de datos \cite{Yale} contiene 165 imágenes en escala de grises en formato GIF de 15 individuos. Hay 11 imágenes por sujeto, una por cada diferente expresión facial o cambio de iluminación: iluminación central , con gafas, feliz, iluminación izquierda, sin gafas ,expresión normal , iluminación derecha , triste , somnoliento , sorprendido , y guiño. Algunas de estas configuraciones pueden apreciarse en la imagen \ref{Yale}
 \begin{figure}[h]
 	\center
 	\includegraphics[scale=0.55]{Yale}
@@ -25,7 +25,7 @@ Esta base de datos(\cite{georghiades1997yale}) contiene 165 imágenes en escala 
     \label{Yale}
 \end{figure}
 \subsection{Georgia Tech}
-La base de datos(\cite{Georgia}) contiene imágenes de 50 personas y se almacena en formato JPEG. Para cada individuo, hay 15 imágenes a color capturadas entre el 06/01/99 y el 15/11/99. La mayoría de las imágenes fueron tomadas en dos sesiones diferentes para tener en cuenta las variaciones en las condiciones de iluminación, la expresión facial y la apariencia. Además de esto, los rostros fueron capturados en diferentes escalas y orientaciones.
+La base de datos \cite{Georgia} contiene imágenes de 50 personas y se almacena en formato JPEG. Para cada individuo, hay 15 imágenes a color capturadas entre el 06/01/99 y el 15/11/99. La mayoría de las imágenes fueron tomadas en dos sesiones diferentes para tener en cuenta las variaciones en las condiciones de iluminación, la expresión facial y la apariencia. Además de esto, los rostros fueron capturados en diferentes escalas y orientaciones.
 
 Esta base de datos a diferencia de las dos descritas anteriormente es especialmente desafiante por que no es normalizada ni recortada y como se puede observar en la Figura \ref{Georgia} donde el proceso de adquisición es más informal.
 \begin{figure}[h]
@@ -65,7 +65,7 @@ Se realizó una comparación de \ac{EBGM} con otros métodos de reconocimiento h
 
 \begin{table}[h]
 \centering
-\caption{Comparación con bases de datos ATT, Yale A y Georgia}
+\caption{Resultados de algoritmos de reconocimiento con bases de datos ATT, Yale A y Georgia}}
 \label{Tcomparacion}
 \begin{tabular}{|l|l|l|l|l}
 \cline{1-4}
@@ -304,7 +304,7 @@ Como se puede observar en las Figuras \ref{im:HaarOjos1} y \ref{im:HaarOjos2} el
     \label{im:HaarOjos2}
 \end{figure}
 
-\subsection{Evaluar validación de detecciones mediante color de piel}
+\subsection{Validación de detecciones mediante color de piel}
 Se probó como método de validación de las detecciones proporcionadas por Viola-Jones, el uso de un método de confirmación a través de detectores de color de piel sel cual se detalla en el algoritmo \ref{alg:ColorPiel}.
 
 \begin{algorithm}[h]
@@ -488,7 +488,7 @@ Oficialmente conocido como "Gaussian Blur", remueve detalles de una imagen aplic
 \subsection{Comparación de redes neuronales}
 EL resultado de nuestra prueba se compara con el trabajo de \cite{mcpherson2016defeating} donde se muestra resultados en TOP 1 donde solo se evalúa al primer resultado mas cercano. La única base de datos que usa es AT\&T descrita en la sección \ref{Att}.
 
-Para replicar su experimento usamos la mis cantidad de datos de entrenamiento (8 imágenes por sujeto) y prueba (2 imágenes por sujeto). 
+Para replicar su experimento usamos la misma cantidad de datos de entrenamiento (8 imágenes por sujeto) y prueba (2 imágenes por sujeto). 
 Todos los rostros fueron ofuscados antes de las pruebas, usado un Kernel Gaussiano de tamaño 64 para asemejarse al ofuscamiento usado por McPherson. 
 
 En este proceso de experimentación se localizan los punto fiduciales en la imagen de entrenamiento y se alinean en la imagen ofuscada, debido a que en la imagen ofuscada no es posible encontrar puntos con la propuesta. Luego de la alineación de puntos se extraen las caracterizaras siguiendo el curso normal del proceso de reconocimiento teniendo una mejora 26\% en el reconocimiento.
@@ -505,7 +505,7 @@ En este proceso de experimentación se localizan los punto fiduciales en la imag
 \end{tabular}
 \end{table}
 
-Como se observa en la tabla \ref{ta::Blurred} la propuesta de esta tesis es superior al resultado obtenido por \cite{mcpherson2016defeating}, esto se puede explicar al hecho que el proceso de \textit{blurring} dispersa la información con el uso del kernel Gaussiano y las mascaras de Gabor las reúne para el proceso de reconocimiento. También la aplicación de \textit{blurring} sobre la imagen del rostro a procesar no parece afectar la recolección de información en el espacio de la señales obtenidas tras la aplicación de las mascaras de Gabor. Finalmente hay que destacar que a diferencia del resto de pruebas, en esta se tienen 8 imágenes de entrenamiento un numero mucho mayor que permite una mayor tasa de aciertos.
+Como se observa en el Cuadro \ref{ta::Blurred} la propuesta de esta tesis es superior al resultado obtenido por \cite{mcpherson2016defeating}, esto se puede explicar al hecho que el proceso de \textit{blurring} dispersa la información con el uso del kernel Gaussiano y las mascaras de Gabor las reúne para el proceso de reconocimiento. También la aplicación de \textit{blurring} sobre la imagen del rostro a procesar no parece afectar la recolección de información en el espacio de la señales obtenidas tras la aplicación de las mascaras de Gabor. Finalmente hay que destacar que a diferencia del resto de pruebas, en esta se tienen 8 imágenes de entrenamiento un numero mucho mayor que permite una mayor tasa de aciertos.
 	
 \section{Consideraciones Finales}
 
