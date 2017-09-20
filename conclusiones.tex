@@ -1,30 +1,37 @@
-%\chapter{Conclusiones y Trabajos Futuros}\label{chap:conclusiones}
-\chapter{Conclusiones }\label{chap:conclusiones}
-%Las conclusiones de la tesis son una parte muy importante y tiene las siguientes partes.
-%En primer lugar debes escribir las conclusiones generales de tu trabajo. evita escribirlas en forma de viñetas. Simplemente utiliza texto continuo.
+\chapter{Conclusiones, publicaciones y trabajos futuros} \label{chap:Conclusiones}
+Finalmente en este capítulo se menciona las conclusiones, publicaciones y propuestas para trabajos futuro derivados del trabajo de tesis expuesto.
+\section{Conclusiones}
 
-Podemos ver que en la tabla \ref{Tcomparacion} y en la figura \ref{Fcomparacion} que \ac{EBGM} que es un algoritmo muy robusto, que mantienen porcentajes de aciertos muy buenos independiente de la base de datos en la que se realiza la prueba y que en ciertas situaciones es mejor que \ac{PCA}, y los otros métodos holísticos.
+En este trabajo de tesis se logró presentar un \textit{pipeline} de reconocimiento de rostros en vídeo vigilancia, lográndolo mediante la modificación de \ac{EBGM} con \ac{CLNF}. Junto a ello se realizó una comparativa de varios métodos holísticos con \ac{EBGM} probando que puede competir con ellos, también se realizó una evaluación de los parámetros que influyen en \ac{EBGM} para mejorar el proceso de reconocimiento.
 
-Hemos logrado mejoras con las modificaciones propuestas, podemos ver las modificaciones en las Gabor Wavelet mejoran el rendimiento del reconocimiento y en el peor de los casos no lo afecta el rendimiento original.El método de pre-procesamiento propuesto por Manjula\cite{manjulaimage} mejora el reconocimiento, algunas configuraciones de pesos afecta el reconocimiento pero siempre hay una configuración que mejora el reconocimiento.
+Se probó que las transformaciones de perspectiva para incrementar el conjunto de entrenamiento no tienen ningún efecto en el aumento de aciertos del reconocimiento.
 
-Estos resultados nos acerca a un método de reconocimiento que es robusto para cualquier situación y que puede ser apto para el reconocimiento de rostros en vídeo vigilancia.
+Se demostró que la modificación propuesta usando \ac{CLNF} como reemplazo para la función de detección de puntos permite el uso de \ac{EBGM} en vídeo, cubriendo el punto mas débil del algoritmo.
 
-Debemos reemplazar la forma en que \ac{EBGM} con un método de detección de puntos mas fiable que los modelos actuales.
+La propuesta del \textit{pipeline} en mejora de iluminación enfrenta parte del problema presentado por el ambiente no controlado, según los resultados experimentales el medio día es el momento del día mas difícil para el reconocimiento debido a la posición del sol.
 
-Es posible que en una futura investigación se pueda aprovechar el hecho que en ocasiones más de una cámara graba a un objeto desde diferentes ángulos lo cual brindaría mayor información sobre el rostro a reconocer.
-La baja calidad de las imágenes es uno de los mayores retos ya que en muchos casos la cámara de seguridad no tiene una gran resolución para distancias largas y cuando una persona está lo bastante cerca el ángulo de visión aumenta de tal manera que se oculta casi la totalidad del rostro.
-El hardware de la cámaras de vigilancia. muchas de las cámaras son fabricadas con sensores que no ofrecen las mejores condiciones para la cancelación de ruido. 
-La naturaleza del ambiente no controlado, la adquisición de las imágenes son dependientes a muchos factores, tales como los individuos , la iluminación y muchos otros los cuales no controlamos
+El uso de gafas dificulta el reconocimiento por acentuar la oclusión del rostro. Mientras que en días extremadamente soleados y causan que las persona cambien su comportamiento, como ocultar su rostros y provoca ciertas sombras, como las que se proyectan con la nariz y la cuenca de los ojos se pronuncien más. 
 
-Finalmente hay que fijar un limite para la privacidad, en el caso de estas aplicación en la cual queremos reconocer un individuo en ambientes, los cuales puede ser lugares públicos existe la posibilidad de infringir la privacidad.
+%En colores de tez muy oscuras en muchos casos, son difíciles detectar el rostro en la escena y los puntos fiduciales.
 
-%La segunda  parte de este capítulo corresponde a las limitaciones que tiene la propuesta. Esta sección es muy importante para que los siguientes estudiantes que hagan algo en esta línea no cometan los
-%mismos errores y tu tesis sea un buen peldaño para avanzar más rápido.
+Aun no es posible realizar el reconocimiento con una sola imagen por persona como conjunto de entrenamiento, por ello es necesario la elección de un conjunto de entrenamiento que cubra por los menos vistas frontales, de izquierda y de derecha para un reconocimiento adecuado.%, también es necesario un análisis que permita incluir un método de súper-resolución para mejorar el porcentaje de aciertos del reconocimiento.
 
-%\section{Recomendaciones}
-%En esta sección el tesista debe reflejar que la tesis ha permitido adquirir nuevos conocimientos que podrían servir para guiar otros trabajos en el futuro.
+Finalmente en lo que respecta al reconocimiento de imágenes ofuscadas las máscaras de Gabor pueden seguir recolectado información relevante aun si la imagen ha sido modificado por un \textit{blurring}, esto se debe a que las mascaras recolectan información regional en el espacio de las señales para poder hacer un reconocimiento.
 
-%\section{Trabajos futuros}
-%En base a los puntos anteriores es recomendable que tu tesis también sugiera trabajos futuros. Esta sección es esencialmente útil para otras ideas de tesis.
+\section{Trabajos futuros}
+A raíz de este trabajo de tesis se ha desarrollado varias propuestas para trabajos futuros siendo los mas relevantes los siguientes:
+\begin{itemize}
+\item Resolver el problema de hallar una configuración optima para los pesos de la función de similitud de \ac{EBGM}.
+\item Probar técnicas de súper resolución para mejorar el reconocimiento y poder detectar rostros pequeños en baja resolución.
+\item Establecer un método de \textit{tracking} que sea robusto en los ambientes no controlados.
+\item Realizar un análisis del coste computacional del proceso de \textit{pipeline} e identificar que procesos se pueden optimizar
+\item Es necesario seguir la investigación de McPherson\cite{mcpherson2016defeating} para poder replicar el experimento y probar con más bases de datos, situaciones de video, y uniformizar las condiciones de las pruebas.
+\end{itemize}
 
-%Todo este capítulo no debe ser más de 4 páginas.
+\section{Publicaciones}
+A lo largo de este trabajo de tesis se presentó los siguientes artículos:
+\begin{itemize}
+\item An Improved Face Recognition Based on Illumination Normalization Technique and Elastic Bunch Graph Matching en ICFIP 2017 International Conference on Frontiersof Image Processing (Articulo aceptado)
+\item Modifications on Illumination,Distance function and Gabor masks for Elastic Bunch Graph Matching en la 35th International Conference of the Chilean Computer Science Society (SCCC 2016) organizado con la 42th Latin American Computing Conference (CLEI 2016)\cite{caceres2016modifications}.
+\end{itemize}
+

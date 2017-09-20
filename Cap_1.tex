@@ -1,15 +1,7 @@
 \chapter{Introducción y contexto}\label{chap:Intro}
 
-%Entre los avances tecnológicos de las ultimas décadas se puede destacar el reconocimiento de rostros, todo ello gracias a una combinación de factores, como el menor costo en cámaras de vídeo, el incremento en sus capacidades de captura, el mayor poder de procesamiento en los microprocesadores. Finalmente a que los algoritmos de visión computacional empezaron a madurar en sus capacidades de reconocimiento y velocidad de procesamiento para poder ser usados en situaciones reales \cite{bradski2008learning}.
-
-%En este capitulo se da una explicación del contexto de reconocimiento de rostros en video como parte del campo de visión computacional.
-%Se listan los problemas y limitaciones actuales para que el reconocimiento de rostros sea posible en un ambiente no controlado.
-
-%\section{Motivación y contexto}
-%mencionar que es, mencionar areas en general , y hablar el reconocimiento
 Visión computacional es el conjunto de metodos y tecnicas por las cuales se intenta comprender y analizar las imagenes del mundo real mediante el uso de una computadora.
 Representa un problema bastante difícil, en parte porque es un problema inverso en el cual intentamos recuperar algunas incógnitas de cómo llegar a una solución especifica, esto quiere decir que sabemos cual es la solución, por ejemplo reconocer un auto o segmentar una figura, pero no conocemos la totalidad del proceso por el cual hemos llegado a dicha solución \cite{szeliski2010computer}. 
-%Esa es la razón por la que subestimamos los problemas de visión computacional debido a nuestra naturaleza de criaturas visuales, mientras la visión es un proceso natural e intuitivo para nosotros, replicarlo en una maquina con toda su versatilidad sigue siendo un gran desafío.
 
 Según Szelisnki \cite{szeliski2010computer} las áreas más comunes de visión computacional son: 
 \begin{itemize}
@@ -57,7 +49,6 @@ Mientras la verificación intenta contestar sí una imagen de un rostro pertenec
 }
 \end{table}
 
-%parte sobre reconocimiento y vídeo vigilancia
 Según el \textit{survey} de Zhao\cite{zhao2003face}, entre las varias aplicaciones del reconocimiento de rostros, Cuadro \ref{TaAplicaciones}, se menciona su aplicación en video vigilancia y \ac{CCTV}. En estas aplicaciones usualmente el proceso de reconocimiento es llevado a cabo por seres humanos, esto implica que la calidad del trabajo no será la misma en todo momento, y aumenta la posibilidad de un error por factor humano. Se explica en mayor detalle este problema y la necesidad de automatizar este proceso en la Sección \ref{ssc:PlanteamientoProblema}.
 
 El uso de cámaras para monitorear lugares de interés no es nuevo, de hecho se ha realizado durante décadas, este arreglo entre cámaras de seguridad y la infraestructura necesaria para su funcionamiento y visualización de las imágenes se conoce como \ac{CCTV}. 
@@ -74,7 +65,6 @@ Se ha mencionado el contexto de esta tesis que es el reconocimiento de rostros e
 
 
 \section{Planteamiento del problema}\label{ssc:PlanteamientoProblema}
-%Introduccion a la seccion y organizacion de la seccion
 El problema de reconocimiento de rostro en vídeo vigilancia aun no ha sido resuelto en visión computacional e inclusive resulta un problema para el ser humano como se explica en \cite{burton1999face} donde se prueba que las personas tienen problemas para reconocer sujeto con los que no son familiares en videos de baja resolución y también en vídeos de alta calidad \cite{burton1999face}.
 Este problema es el resultado de varios factores que pueden ser agrupados en problemas relacionados con el ambiente no controlado.
 
@@ -83,7 +73,7 @@ En el contexto actual del reconocimiento de rostros se puede mencionar algunos p
 
 Listamos a continuación  los problemas más relevantes según Gross  \cite{gross2001quo}:
 
-\begin{enumerate}[1.]
+\begin{enumerate}%[label={[\arabic*]}]
 \item \textit{Efectos de la iluminación} \cite{kalocsai1998face} \cite{johnston1992recognising} \cite{bruce1998human} \cite{hill1996effects}.- Debido a que un rostro es un objeto tridimensional, las variaciones en las fuentes de iluminación pueden provocar alteraciones en la captura de la imagen, esto también es valido para fuentes de luz indirecta, ello puede causar sombras que acentúan o disminuyen ciertas características faciales. Un ejemplo es la cantidad inherente de luz reflejada en la piel, los ajustes de captura dentro de la cámara, etc. Todo ello ha de afectar la calidad de la imagen y/o vídeo. Un ejemplo se puede observar en la Figura \ref{im:EjemIluminacion}
 \begin{figure}[h]
 \center
@@ -135,7 +125,6 @@ Listamos a continuación  los problemas más relevantes según Gross  \cite{gros
 \caption{Un ejemplo clásico de la oclusión del rostro es el uso de lentes de sol. Extraídos de la base de datos "Yale A".}
 \label{im:EjemOclusion}
 \end{figure}
-
 \end{enumerate}
 
 %Problemas de video vigilancia
@@ -151,14 +140,9 @@ A parte de los problemas listados, cuando el reconocimiento de rostros se aplica
 %conclusion sobre seccion // mencionar biometria
 Como se ha podido observar en esta sección el reconocimiento de rostros en vídeo vigilancia es una tarea muy difícil debido a la conjunción de varios factores, como el ambiente no controlado donde aparecen todas las dificultades relacionadas al típico reconocimiento de rostros. A ello se suma los problemas del escenario de video vigilancia en el cual se puede esperar la falta de cooperación de los sujetos a identificar y finalmente la calidad de los videos y las imágenes de los rostros.
 
-%También es necesario considerar el concepto de biometría para poder presentar una forma de medida única para todas la personas en la cual podamos extraer característica que todos posean y su necesidad de ser considerada cuando se aplica el reconocimiento de rostros en vídeo vigilancia. Entramos en detalle sobre este punto en el Capítulo \ref{chap:Conceptos}.
-
 Como parte de la propuesta expuesta en detalle en el Capítulo \ref{chap:Propuesta} intentamos resolver el problema de reconocimiento de rostros en un \textit{pipeline} de video vigilancia bajo las condiciones de una cámara de seguridad en alta definición, proponemos enfrentar las variaciones de iluminación a través de técnicas de pre-procesamiento, afrontar en parte el problema de variación de poses con el uso de los últimos avances en el \acf{CLNF} y \acf{EBGM} como método de reconocimiento biométrico. 
 
-%No enfrentamos los problemas de 
-
 \section{Objetivos}\label{scc:Objetivos}
-%Según lo descrito en la sección anterior se estableció un objetivo general que es alcanzado a través de la propuesta explicada en el Capitulo \ref{chap:Propuesta}  y varios objetivos secundarios que serán alcanzados a través de las pruebas realizadas en este trabajo.
 
 \subsection{Objetivo general}
 Proponer un \textit{pipeline} para el reconocimiento de rostros en una escena de vídeo con la adaptación de \acf{CLNF} y \acf{EBGM} para su uso final en vídeo vigilancia.
@@ -203,4 +187,3 @@ Se menciona el aporte de la modificación de \ac{EBGM} usando \ac{CLNF} para su 
 \end{enumerate}
 
 Se ha expuesto el contexto y la necesidad de contar con propuestas par afrontar el trabajo de vídeo vigilancia en este trabajo, es necesario seguir resaltando su dificultad no solo para los algoritmos de visión computacional, sino para la personas en diversas situaciones.
-%En el próximo capitulo explicamos los conceptos necesarios para entender la propuesta de este trabajo de tesis.

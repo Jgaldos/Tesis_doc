@@ -1,8 +1,5 @@
 \begin{thebibliography}{}
 
-\bibitem[Yal, ]{Yale}
-
-
 \bibitem[Alice, 2003]{alice2003biometric}
 Alice, I. (2003).
 \newblock Biometric recognition: Security and privacy concerns.
@@ -40,9 +37,10 @@ Burton, A.~M., Wilson, S., Cowan, M., and Bruce, V. (1999).
 Caceres, J. C.~G., Chavez, J. R.~G., and Riveros, E.~L. (2016).
 \newblock Modifications on illumination, distance function and gabor masks for
   elastic bunch graph matching.
+\newblock {\em CLEI Electronic Journal}, 19(2).
 
-\bibitem[Cambridge, ]{ATT}
-Cambridge, A.~L.
+\bibitem[Cambridge, 2002]{ATT}
+Cambridge, A.~L. (2002).
 \newblock Att the database of faces (formerly the orl database of faces).
 
 \bibitem[Cortes and Vapnik, 1995]{cortes1995support}
@@ -65,6 +63,12 @@ Dalal, N. and Triggs, B. (2005).
 Er, M.~J., Wu, S., Lu, J., and Toh, H.~L. (2002).
 \newblock Face recognition with radial basis function (rbf) neural networks.
 \newblock {\em IEEE transactions on neural networks}, 13(3):697--710.
+
+\bibitem[Georghiades et~al., 1997]{georghiades1997yale}
+Georghiades, A., Belhumeur, P., and Kriegman, D. (1997).
+\newblock Yale face database.
+\newblock {\em Center for computational Vision and Control at Yale University,
+  http://cvc. yale. edu/projects/yalefaces/yalefa}, 2.
 
 \bibitem[Givens et~al., 2004]{givens2004features}
 Givens, G., Beveridge, J.~R., Draper, B.~A., Grother, P., and Phillips, P.~J.
@@ -140,10 +144,11 @@ Liu, C. (2006).
 \newblock {\em IEEE transactions on pattern analysis and machine intelligence},
   28(5):725--737.
 
-\bibitem[Manjula, ]{manjulaimage}
-Manjula, V.
+\bibitem[Manjula, 2014]{manjulaimage}
+Manjula, V. (2014).
 \newblock Image normalization robust using histogram equalization and logarithm
   transform frequency dct coefficients for illumination in facial images.
+\newblock {\em International Journal of Science and Research (IJSR)}.
 
 \bibitem[McPherson et~al., 2016]{mcpherson2016defeating}
 McPherson, R., Shokri, R., and Shmatikov, V. (2016).
@@ -201,8 +206,8 @@ Szeliski, R. (2010).
 \newblock {\em Computer vision: algorithms and applications}.
 \newblock Springer Science \& Business Media.
 
-\bibitem[Tech, ]{Georgia}
-Tech, G.
+\bibitem[Tech, 1999]{Georgia}
+Tech, G. (1999).
 \newblock Georgia tech face database.
 
 \bibitem[Thamizharasi and Jayasudha, 2015]{thamiz2015liter}
