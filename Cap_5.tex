@@ -9,7 +9,7 @@ La segunda parte muestra varias secciones de resultados como: Comparación de \a
 \section{Base de datos}
 A continuación se menciona una descripción de las bases de datos usadas en las pruebas de este capítulo y una creada a partir de imágenes obtenidas de una cámara de seguridad para la prueba de la propuesta final.
 \subsection{AT\&T}
-Cuenta con diez imágenes diferentes por cada uno de los 40 sujetos que componen dicha base de datos(\cite{ATT})  . En algunos sujetos, las imágenes fueron tomadas en diferentes momentos , las imágenes presentan variación de la iluminación, de las expresiones faciales (ojos abiertos / cerrados, sonriendo / sin sonreír) y de los detalles faciales ( lentes / sin gafas ) . Todas las imágenes fueron tomadas contra un fondo homogéneo oscuro con los sujetos en posición vertical , frontal (con tolerancia para un cierto movimiento lateral). Se puede observa una muestra de esta base de datos en la Figura \ref{Att}.
+Presentada en \cite{ATT}, cuenta con diez imágenes diferentes por cada uno de los 40 sujetos que componen dicha base de datos. En algunos sujetos, las imágenes fueron tomadas en diferentes momentos , las imágenes presentan variación de la iluminación, de las expresiones faciales (ojos abiertos / cerrados, sonriendo / sin sonreír) y de los detalles faciales ( lentes / sin gafas ) . Todas las imágenes fueron tomadas contra un fondo homogéneo oscuro con los sujetos en posición vertical , frontal (con tolerancia para un cierto movimiento lateral). Se puede observa una muestra de esta base de datos en la Figura \ref{Att}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.7]{Att}
@@ -17,7 +17,7 @@ Cuenta con diez imágenes diferentes por cada uno de los 40 sujetos que componen
     \label{Att}
 \end{figure}
 \subsection{Yale A}
-Esta base de datos \cite{Yale} contiene 165 imágenes en escala de grises en formato GIF de 15 individuos. Hay 11 imágenes por sujeto, una por cada diferente expresión facial o cambio de iluminación: iluminación central , con gafas, feliz, iluminación izquierda, sin gafas ,expresión normal , iluminación derecha , triste , somnoliento , sorprendido , y guiño. Algunas de estas configuraciones pueden apreciarse en la imagen \ref{Yale}
+Presentada en \cite{georghiades1997yale}, contiene 165 imágenes en escala de grises en formato GIF de 15 individuos. Hay 11 imágenes por sujeto, una por cada diferente expresión facial o cambio de iluminación: iluminación central , con gafas, feliz, iluminación izquierda, sin gafas ,expresión normal , iluminación derecha , triste , somnoliento , sorprendido , y guiño. Algunas de estas configuraciones pueden apreciarse en la imagen \ref{Yale}
 \begin{figure}[h]
 	\center
 	\includegraphics[scale=0.55]{Yale}
@@ -61,7 +61,7 @@ La razón para la elección de grupos de entrenamiento tan reducidos es poder ac
 A continuación se realiza una comparativa del método de reconocimiento usado en la propuesta y otros métodos extraídos del estado del arte.
 
 \section{Comparación de \ac{EBGM} con métodos holísticos}\label{scc:Comparacion}
-Se realizó una comparación de \ac{EBGM} con otros métodos de reconocimiento holísticos usados en la literatura como; \ac{PCA}(\cite{turk1991eigenfaces}), \ac{KFA}(/(\cite{yang2002kernel}) y \ac{LDA}(\cite{zhao1999subspace}), todos ellos implementados en matlab por The PhD Toolbox \cite{struc2012phd} para demostrar el rendimiento de estos algoritmos en varias situaciones. Esta comparación se realizo con las tres primeras bases de datos para establecer una diferencia entre el método escogido en la propuesta y otros métodos del estado del arte.
+Se realizó una comparación de \ac{EBGM} con otros métodos de reconocimiento holísticos usados en la literatura como; \ac{PCA}(\cite{turk1991eigenfaces}), \ac{KFA}(/(\cite{yang2002kernel}) y \ac{LDA}(\cite{zhao1999subspace}), todos ellos implementados en matlab por The PhD Toolbox(\cite{struc2012phd}) para demostrar el rendimiento de estos algoritmos en varias situaciones. Esta comparación se realizo con las tres primeras bases de datos para establecer una diferencia entre el método escogido en la propuesta y otros métodos del estado del arte.
 
 \begin{table}[h]
 \centering
@@ -428,7 +428,7 @@ Para probar que la propuesta es una mejor alternativa se hizo una comparación d
 \end{table}
 
 
-El uso de \ac{CLNF} tal como lo propone \cite{baltrusaitis2013constrained} entrega un grupo de 68 puntos como se puede observar en la Figura \ref{im:68Landmark} mientras que \ac{EBGM} usa 25, Cuadro \ref{ta:PuntosFiduciales}, pero entre estos dos grupos no existe correspondencia para los tres puntos que se refieren a cabello. Por lo que se realiza un filtrado para solo corresponder a 22 puntos fiduciales.
+El uso de \ac{CLNF} tal como lo propone \cite{baltrusaitis2013constrained} entrega un grupo de 68 puntos como se puede observar en la Figura \ref{im:22Landmark} mientras que \ac{EBGM} usa 25, Cuadro \ref{ta:PuntosFiduciales}, pero entre estos dos grupos no existe correspondencia para los tres puntos que se refieren a cabello. Por lo que se realiza un filtrado para solo corresponder a 22 puntos fiduciales.
 
 \begin{figure}[h]
     \centering

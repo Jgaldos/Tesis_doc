@@ -153,7 +153,7 @@ Todo ello permite llevar a \ac{EBGM} a un entorno de vídeo vigilancia sin ayuda
 
 \section{Pre-procesamiento y normalización de imágenes}\label{scc:PropIluminacion}
 
-Una vez el rostro ha sido detectado, validado y con los puntos fiduciales encontrados, a la imagen del rostro se le aplica una mejora en iluminación a través de ecualización de histograma, transformada de logaritmo y transformada discreta de coseno, presentada en el trabajo de Manjula (\cite{manjulaimage}), siendo la siguiente Ecuación \ref{f_normaliza}:
+Una vez el rostro ha sido detectado, validado y con los puntos fiduciales encontrados, a la imagen del rostro se le aplica una mejora en iluminación a través de ecualización de histograma, transformada de logaritmo y transformada discreta de coseno, presentada en el trabajo de \cite{manjulaimage}, siendo la siguiente Ecuación \ref{f_normaliza}:
 
 \begin{equation}
 	F(x,y) = c_{1}*DCT + c_{2}*Lg + c_{3}*HE
@@ -206,7 +206,7 @@ Por lo que es necesario un filtrado de puntos para realizar una correspondencia 
 \center
 \includegraphics[scale=0.06]{landmarkPoints}
 \includegraphics[scale=0.45]{FiltroDespues}
-\caption{Izquierda:untos fiduciales entregados por \ac{CLNF}, extraído del proyecto ``Open Face''. Derecah: Puntos fiduciales después del proceso de filtrado}
+\caption{Izquierda:untos fiduciales entregados por \ac{CLNF}, extraído del proyecto ``Open Face''. Derecha: Puntos fiduciales después del proceso de filtrado}
 \label{im:22Landmark}
 \end{figure}
 
