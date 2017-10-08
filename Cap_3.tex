@@ -40,7 +40,7 @@ El detector de Viola-Jones es ampliamente usado y reconocido como un detector qu
 Otro defecto es que solo detecta rostro de frente. No puede detectar otras posiciones del rostro humano simultáneamente. A pesar de estas deficiencia sigue siendo usado no solo para rostros sino para otro tipo de objetos ya que su mayor ventaja es que es entrenarle.
 
 \subsection{Detector de \acf{HOG}}
-Un detector de \acf{HOG} usa una combinación del descriptor de \ac{HOG} y un clasificador basado en \acf{SVM}, originalmente usado para detectar personas \cite{dalal2005histograms}, su uso se ha incrementado a varias situaciones, incluyendo la detección de rostros, a continuación exponemos las ideas detrás de este detector.
+Un detector de \acf{HOG} usa una combinación del descriptor de \ac{HOG} y un clasificador basado en \acf{SVM}, originalmente usado para detectar personas, presentado en \cite{dalal2005histograms}, su uso se ha incrementado a varias situaciones, incluyendo la detección de rostros, a continuación exponemos las ideas detrás de este detector.
 \subsubsection{Descriptor de \ac{HOG}}
 Un descriptor de \ac{HOG} muestra el calculo de la gradiente de una imagen, la gradiente es cambio de la intensidad de la imagen en una cierta dirección, pudiendo ser representado como un vector que posee magnitud $g$ y dirección $\theta$, el calculo del gradiente en una imagen se hace por pixel y retorna la dirección del cambio y su magnitud, este proceso se observa en las siguientes ecuaciones:
 \begin{equation}
@@ -61,7 +61,7 @@ Donde $x$ y $y$ son las coordenadas de la imagen y la función $I(x,y)$ es el va
 Con esta información se puede describir el contorno y forma de una figura, lo que es útil para realizar una clasificación.
 
 \subsection{\acf{SVM}}
-Un \ac{SVM} \cite{cortes1995support} es un clasificador lineal en el cual se intenta crear una linea divisoria entre las representación (vectores de características) de ejemplos positivos y negativos de un objeto determinado.
+Un \ac{SVM} (\cite{cortes1995support}) es un clasificador lineal en el cual se intenta crear una linea divisoria entre las representación (vectores de características) de ejemplos positivos y negativos de un objeto determinado.
 
 Esta basado en el aprendizaje estadístico para resolver problemas de clasificación de patrones. Los clasificadores lineales se caracterizan porque aprenden una función lineal para separar las clases. No se trata de una agrupación por similitudes, sin que existe una separación definida entre clases.
 
@@ -81,7 +81,7 @@ En \cite{baltrusaitis2013constrained} se propone el uso de redes neuronales para
 Como se puede observar en las secciones anteriores un problema en especial difícil es la iluminación, por lo que es necesario hablar sobre las técnicas de pre-procesamiento, se entiende como pre-procesamiento a las técnicas que modifican una imagen para acentuar alguna característica, estas serán usadas para afrontar dicho problema.
 
 \subsection{Ecualización de histograma}
-Las ecualización del histograma de una imagen es una transformación que pretende obtener para una imagen un histograma con una distribución uniforme. Es decir, que exista el mismo número de pixeles para cada nivel de gris del histograma de una imagen monocroma \cite{orlova2002image}.
+Las ecualización del histograma de una imagen es una transformación que pretende obtener para una imagen un histograma con una distribución uniforme. Es decir, que exista el mismo número de pixeles para cada nivel de gris del histograma de una imagen monocroma (\cite{orlova2002image}).
 La función de la ecualización es:
 \begin{equation}
 h(v)=Redondeo\Bigg(\frac{cdf(v)-cdf_{min}}{(M\times N)-cdf_{min}} \times (L-1)\Bigg)
@@ -99,7 +99,7 @@ Donde $cdf_{min}$ es el mínimo valor no nulo de la función de distribución de
 
 
 \subsection{Transformada de logaritmo}
-La Transformada de logaritmo asigna un rango estrecho de valores (píxeles en escala de grises o un canal de un espacio de color) de un rango amplio de valores de entrada. La transformada de logaritmos es útil si se necesita expandir los valores de píxeles oscuros de una imagen mientras se comprime los valores altos \cite{thamiz2015liter}
+La Transformada de logaritmo asigna un rango estrecho de valores (píxeles en escala de grises o un canal de un espacio de color) de un rango amplio de valores de entrada. La transformada de logaritmos es útil si se necesita expandir los valores de píxeles oscuros de una imagen mientras se comprime los valores altos (\cite{thamiz2015liter})
 
 \begin{equation}
 \label{f_log}
@@ -118,8 +118,7 @@ Donde $r$ es la imagen de entrada, $c$ es una constante, $s$ es la imagen mejora
 \end{figure}
 
 \subsection{Transformada discreta de coseno}
-La transformada Discreta de coseno (DCT por sus siglas en ingles) es utilizada especialmente en el procesamiento de señales e imágenes. DCT expresa en una secuencia finita de puntos, datos en términos de sumas de funciones de coseno en diferentes frecuencias. En el procesamiento de imágenes, la utilización de DCT ayuda a descomponer una imagen en frecuencias, donde usualmente los pequeños componentes de frecuencia altas pueden ser descartados. La ecuación en 2D está dada por la Ecuación. \ref{f_dct}
-\cite{thamiz2015liter}\cite{vish2015ill}
+La transformada Discreta de coseno (DCT por sus siglas en ingles) como se muestra en \cite{thamiz2015liter} y en \cite{vish2015ill} es utilizada especialmente en el procesamiento de señales e imágenes. DCT expresa en una secuencia finita de puntos, datos en términos de sumas de funciones de coseno en diferentes frecuencias. En el procesamiento de imágenes, la utilización de DCT ayuda a descomponer una imagen en frecuencias, donde usualmente los pequeños componentes de frecuencia altas pueden ser descartados. La ecuación en 2D está dada por la Ecuación. \ref{f_dct}
 
 \begin{equation}
 	\label{f_dct}
@@ -199,7 +198,6 @@ C(x(t))(t_0,\omega)=a_{real}+ia_{imag}
 Mientras las ecuaciones presentadas hasta ahora trabajan en una dimensión es necesario presentar una forma en la que se pueda trabajar en dos dimensiones, esta es la representación del Gabor Wavelet como mascara para una convoluciónn en imágenes.
 
 La Ecuación \ref{GaborWavelet} define como crear una máscara de Gabor donde $x, y$ son las posiciones en la mascara, para cualquier tamaño de mascara.
-%El Gabor Jet es un nodo en la malla elástica, el cual describe el comportamiento alrededor de un pixel. Esto es el resultado de la convolución de un pixel de la imagen con varios Gabor wavelet o máscaras de Gabor, los cuales son usados para detectar formas y extraer características.
 
 \begin{equation}
 W(x,y,\theta,\lambda, \phi, \sigma, \gamma )=e^{-\frac{x'^2+\gamma y'^2}{2 \sigma^2}}cos(2\pi \frac{x'}{\lambda}+\phi) 
@@ -238,7 +236,7 @@ Como se menciona en la sección anterior la convolución del conjunto de mascara
 \begin{figure}[h]
 \center
 \includegraphics[scale=1.5]{Points}
-\caption{Muestra de los puntos fiduciales elegidos en \ac{EBGM}\cite{bolme2003elastic}, en cada punto se realiza 40 convoluciones con máscaras de Gabor para crear un Gabor Jet por punto}
+\caption{Muestra de los puntos fiduciales elegidos en \ac{EBGM}, en cada punto se realiza 40 convoluciones con máscaras de Gabor para crear un Gabor Jet por punto}
 \label{im:puntos}
 \end{figure}
 
@@ -345,7 +343,7 @@ En esta sección se explicó el funcionamiento de \ac{EBGM} que extrae caracter�
 \section{Consideraciones finales}
 En este capítulo se ha expuesto todos los métodos que interviene en alguna u otra forma en la propuesta, se ha presentado una introducción a cada una de ellos.
 
-Es necesario resaltar que \ac{EBGM} es un método de reconocimiento biométrico, que se refiere a una forma de reconocimiento basado en un vector de características que derivan mayormente de características biológicas, se considera mucho mas confiable que otros métodos de reconocimiento que usan claves, contraseñas, tarjetas, etc \cite{alice2003biometric}. Esto se debe a cumple con los requerimientos necesarios para ser considerado como tal siendo estos los siguientes:
+Es necesario resaltar que \ac{EBGM} es un método de reconocimiento biométrico, que se refiere a una forma de reconocimiento basado en un vector de características que derivan mayormente de características biológicas, se considera mucho mas confiable que otros métodos de reconocimiento que usan claves, contraseñas, tarjetas, etc. Esto se debe a cumple con los requerimientos necesarios para ser considerado como tal siendo estos los siguientes:
 
 \begin{itemize}
 \item Universalidad.- Toda persona debe tener dicha característica.
