@@ -44,10 +44,10 @@ Un detector de \acf{HOG} usa una combinación del descriptor de \ac{HOG} y un cl
 \subsubsection{Descriptor de \ac{HOG}}
 Un descriptor de \ac{HOG} muestra el calculo de la gradiente de una imagen, la gradiente es cambio de la intensidad de la imagen en una cierta dirección, pudiendo ser representado como un vector que posee magnitud $g$ y dirección $\theta$, el calculo del gradiente en una imagen se hace por pixel y retorna la dirección del cambio y su magnitud, este proceso se observa en las siguientes ecuaciones:
 \begin{equation}
-dx=I(x+1,y)-I(x-1,y)
+dx=V(x+1,y)-V(x-1,y)
 \end{equation}
 \begin{equation}
-dy=I(x,y+1)-I(x,y-1)
+dy=V(x,y+1)-V(x,y-1)
 \end{equation}
 \begin{equation}
 \theta(x,y)=arctan\left(\frac{dy}{dx}\right)
@@ -56,7 +56,7 @@ dy=I(x,y+1)-I(x,y-1)
 g(x,y)=\sqrt[2]{dx^2+dy^2}
 \end{equation}
 
-Donde $x$ y $y$ son las coordenadas de la imagen y la función $I(x,y)$ es el valor del pixel o intensidad en dichas coordenadas. Luego se divide la imagen en secciones iguales y en cada una de estas secciones se calcula un histograma de las orientaciones para conocer la orientación dominante de cada sección, de esta manera creamos un vector de características.
+Donde $x$ y $y$ son las coordenadas de la imagen y la función $V(x,y)$ es el valor del pixel o intensidad en dichas coordenadas. Luego se divide la imagen en secciones iguales y en cada una de estas secciones se calcula un histograma de las orientaciones para conocer la orientación dominante de cada sección, de esta manera creamos un vector de características.
 
 Con esta información se puede describir el contorno y forma de una figura, lo que es útil para realizar una clasificación.
 
@@ -103,10 +103,10 @@ La Transformada de logaritmo asigna un rango estrecho de valores (píxeles en es
 
 \begin{equation}
 \label{f_log}
-s = c*log(1+ 256*r)
+I_s = c*log(1+ 256*I_r)
 \end{equation}
 
-Donde $r$ es la imagen de entrada, $c$ es una constante, $s$ es la imagen mejorada. Para la transformada de logaritmo se utilizo el valor de 20 para la constante $ c $. 
+Donde $I_r$ es la imagen de entrada, $c$ es una constante, $I_s$ es la imagen mejorada. Para la transformada de logaritmo se utilizo el valor de 20 para la constante $ c $. 
 
 \begin{figure}[h]
 \center
@@ -322,14 +322,14 @@ Al final solo se hace una comparación punto a punto entre dos Face Graph para e
 El proceso de reconocimiento se lleva a cabo mediante una función de similitud que compara cuan iguales son dos Face Graph, dicha función se expresa de la siguiente forma:
 \begin{equation}
 \label{FaceGraphSimiFunc}
-L_{jet}(G,G')=\frac{1}{N}\sum_{i=0}^{N}S(J_{i},J'_{i})
+L_{jet}(G,G')=\frac{1}{P}\sum_{i=0}^{P}S(J_{i},J'_{i})
 \end{equation}
-Donde $N$ es el numero de puntos fiduciales y $J_i,J'_i$ son los i-ésimos Gabor Jet que pertenecen respectivamente a los Face Graph $G,G'$ que van a ser comparados.
+Donde $P$ es el numero de puntos fiduciales y $J_i,J'_i$ son los i-ésimos Gabor Jet que pertenecen respectivamente a los Face Graph $G,G'$ que van a ser comparados.
 
 La función de similitud entre dos Gabor Jet es la siguiente:
 \begin{equation}
 \label{GaborJetSimiFunc}
-S(J,J')=\frac{\sum_{j=1}^{N}a_j a'_jcos(\phi_j-\phi'_j)}{\sqrt{\sum_{j=1}^{N}a_j^2 \sum_{j=1}^{N}{a'}_j^2}}
+S(J,J')=\frac{\sum_{j=1}^{P}a_j a'_jcos(\phi_j-\phi'_j)}{\sqrt{\sum_{j=1}^{P}a_j^2 \sum_{j=1}^{P}{a'}_j^2}}
 \end{equation}
 
 %escribir un parrafo sobre la comparacion de givens
