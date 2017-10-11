@@ -32,17 +32,17 @@ A continuación una breve explica como funciona este método:
 
 Se supone que $\Gamma$ es un vector $N^2\times 1$ que corresponde a una imagen de rostro $N\times N$ llamada $I$ donde el objetivo es representar $\Gamma (\Phi-media)$ en un espacio de baja dimensión; $\Phi- media=w_1u_1+w_2u_2+.....w_ku_k$ donde $k<<N^2$ , $w$ es el peso asociado al \textit{eigenface} $u$.
 
-Entonces si se tiene un conjunto de imágenes de rostro del mismo tamaño ${I_1,I_2,...,I_M}$ donde cada $I_i$ se puede representar como un vector $\Gamma_i$, se tiene que calcular el vector promedio de rostro $\Psi$:
-\[\Psi =\frac{1}{M}\sum^M_{i=1}\Gamma_i\] 
+Entonces si se tiene un conjunto de imágenes de rostro del mismo tamaño ${I_1,I_2,...,I_Q}$ donde cada $I_i$ se puede representar como un vector $\Gamma_i$, se tiene que calcular el vector promedio de rostro $\Psi$:
+\[\Psi =\frac{1}{Q}\sum^Q_{i=1}\Gamma_i\] 
 La nueva representación del rostro es: 
 \[\Phi_i=\Gamma_i-\Psi\]
-Después se calcula una matriz de covarianza $C$:
-\[C=\frac{1}{M}\sum^M_{n=1}\Phi_n \Phi^T_n=AA^T \]
-Siendo una matriz $N^2\times N^2$ donde $A=[\Phi_1\Phi_2...\Phi_M]$ es una matriz $N^2\times M$.
+Después se calcula una matriz de covarianza $Co$:
+\[Co=\frac{1}{Q}\sum^M_{n=1}\Phi_n \Phi^T_n=AA^T \]
+Siendo una matriz $N^2\times N^2$ donde $A=[\Phi_1\Phi_2...\Phi_M]$ es una matriz $N^2\times Q$.
 
-Sobre la matriz $AA^T$ se debe hallar auto vectores $u_i$, pero resulta ser una matriz muy grande lo que resulta poco practico, por lo que se considera la matriz $A^TA$ que es una matriz $M\times M$ donde si podemos calcula auto vectores $v_i$ siendo: 
+Sobre la matriz $AA^T$ se debe hallar auto vectores $u_i$, pero resulta ser una matriz muy grande lo que resulta poco practico, por lo que se considera la matriz $A^TA$ que es una matriz $Q\times Q$ donde si podemos calcula auto vectores $v_i$ siendo: 
 \[A^TAv_i=\mu_iv_i\]
-Dónde existe una relación de correspondencia donde los $M$ autovalores y autovectores de $A^TA$ son los $M$ autovalores y autovectores más grandes de $AA^T$. De esta manera mantenemos los $K$ vectores mas significativos. Ahora cada rostros esta representado por: 
+Dónde existe una relación de correspondencia donde los $Q$ autovalores y autovectores de $A^TA$ son los $Q$ autovalores y autovectores más grandes de $AA^T$. De esta manera mantenemos los $K$ vectores mas significativos. Ahora cada rostros esta representado por: 
 \[\Phi_i-media= \sum^{K}_{j=1} w_j u_j, (W_j=u^T_j\Phi_i)\]
 Dónde $u_j$ es un \textit{eigenface}, finalmente cada rostros puede ser representado como una colección de pesos:
 \[\Omega_i=\begin{bmatrix}
@@ -50,7 +50,7 @@ w^i_1\\
 w^i_2\\ 
 ...\\ 
 w^i_k
-\end{bmatrix} , i=1,2,...,M\]
+\end{bmatrix} , i=1,2,...,Q\]
 
 De esta manera \ac{PCA} reduce la dimensión de una imagen de rostro a un conjunto de pesos. Un problema que tiene esta relacionado al proceso de reducción en si donde no se sabe que características se están extrayendo y presenta una susceptibilidad a la variación de la data ingresada.
 
