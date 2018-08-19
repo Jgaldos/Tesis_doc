@@ -33,11 +33,12 @@ Burton, A.~M., Wilson, S., Cowan, M., and Bruce, V. (1999).
   surveillance.
 \newblock {\em Psychological Science}, 10(3):243--248.
 
-\bibitem[Caceres et~al., 2016]{caceresmodifications}
-Caceres, J. C.~G., Chavez, J. R.~G., and Riveros, E.~L. (2016).
+\bibitem[Caceres and Ch{\'a}vez, 2016]{caceres2016modifications}
+Caceres, J. C.~G. and Ch{\'a}vez, J. R.~G. (2016).
 \newblock Modifications on illumination, distance function and gabor masks for
   elastic bunch graph matching.
-\newblock {\em CLEI Electronic Journal}, 19(2).
+\newblock In {\em Computer Science Society (SCCC), 2016 35th International
+  Conference of the Chilean}, pages 1--5. IEEE.
 
 \bibitem[Cambridge, 2002]{ATT}
 Cambridge, A.~L. (2002).
@@ -63,6 +64,11 @@ Dalal, N. and Triggs, B. (2005).
 Er, M.~J., Wu, S., Lu, J., and Toh, H.~L. (2002).
 \newblock Face recognition with radial basis function (rbf) neural networks.
 \newblock {\em IEEE transactions on neural networks}, 13(3):697--710.
+
+\bibitem[Fazl-Ersi et~al., 2007]{fazl2007robust}
+Fazl-Ersi, E., Zelek, J.~S., and Tsotsos, J.~K. (2007).
+\newblock Robust face recognition through local graph matching.
+\newblock {\em Journal of Multimedia}, 2(5):31--37.
 
 \bibitem[Georghiades et~al., 1997]{georghiades1997yale}
 Georghiades, A., Belhumeur, P., and Kriegman, D. (1997).
@@ -125,11 +131,22 @@ Johnston, A., Hill, H., and Carman, N. (1992).
   brightness reversal.
 \newblock {\em Perception}, 21(3):365--375.
 
+\bibitem[Kafai et~al., 2014]{kafai2014reference}
+Kafai, M., An, L., and Bhanu, B. (2014).
+\newblock Reference face graph for face recognition.
+\newblock {\em IEEE Transactions on information forensics and security},
+  9(12):2132--2143.
+
 \bibitem[Kalocsai et~al., 1998]{kalocsai1998face}
 Kalocsai, P., Zhao, W., and Elagin, E. (1998).
 \newblock Face similarity space as perceived by humans and artificial systems.
 \newblock In {\em Automatic Face and Gesture Recognition, 1998. Proceedings.
   Third IEEE International Conference on}, pages 177--180. IEEE.
+
+\bibitem[Liao and Li, 2000]{liao2000face}
+Liao, R. and Li, S.~Z. (2000).
+\newblock Face recognition based on multiple facial features.
+\newblock In {\em fg}, page 239. IEEE.
 
 \bibitem[Lin et~al., 1997]{lin1997face}
 Lin, S.-H., Kung, S.-Y., and Lin, L.-J. (1997).

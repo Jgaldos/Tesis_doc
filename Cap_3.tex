@@ -71,7 +71,7 @@ Dado un conjunto de ejemplos de entrenamiento (muestras) podemos etiquetar las c
 
 
 \subsection{\acf{CLNF}}
-\ac{CLNF} es un método para encontrar puntos de interés en imágenes de rostros presentado en \cite{baltrusaitis2013constrained} e implementado para aplicaciones de video en \cite{Baltrusaitis2016} en la presentación de su framework ``Open Face'' para el tracking y detección de rostros, donde publica el código de su propuesta, \ac{CLNF} se basa en \ac{CLM}, por lo tanto empezamos con una explicación de \ac{CLM}.
+\ac{CLNF} es un método para encontrar puntos de interés en imágenes de rostros presentado en \cite{baltrusaitis2013constrained} e implementado para aplicaciones de vídeo en \cite{Baltrusaitis2016} en la presentación de su framework ``Open Face'' para el rastreo y detección de rostros, donde publica el código de su propuesta, \ac{CLNF} se basa en \ac{CLM}, por lo tanto empezamos con una explicación de \ac{CLM}.
 
 \ac{CLM} es una forma para localizar un conjunto de puntos restringido por un modelo en una imagen, el proceso consiste en tomar una muestra de una área de la imagen donde se realizó una estimación inicial proyectarla a un marco de referencia. Por cada punto se genera una imagen de respuesta donde se le da una puntuación por tener el punto a localizar en cada pixel. Este puntaje es determinado a través de un detector local que evalúa el punto según un modelo de distribución de puntos en donde penaliza distribuciones complicadas y premia distribuciones simples y mas probables, de esta manera se evalúan todos los puntos en conjunto.
 
