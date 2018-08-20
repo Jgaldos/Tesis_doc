@@ -1,4 +1,4 @@
-\chapter{Marco teórico de la propuesta}\label{chap:Conceptos}
+\chapter{Marco teórico}\label{chap:Conceptos}
 En este capítulo se presenta todos los conceptos y técnicas usadas para el desarrollo de la propuesta desde las técnicas de detección usadas hasta el proceso de reconocimiento.
 
 \section{Métodos de detección}
@@ -61,7 +61,7 @@ Donde $x$ y $y$ son las coordenadas de la imagen y la función $V(x,y)$ es el va
 Con esta información se puede describir el contorno y forma de una figura, lo que es útil para realizar una clasificación.
 
 \subsection{\acf{SVM}}
-Un \ac{SVM} (\cite{cortes1995support}) es un clasificador lineal en el cual se intenta crear una linea divisoria entre las representación (vectores de características) de ejemplos positivos y negativos de un objeto determinado.
+Un \ac{SVM} \citep{cortes1995support} es un clasificador lineal en el cual se intenta crear una linea divisoria entre las representación (vectores de características) de ejemplos positivos y negativos de un objeto determinado.
 
 Esta basado en el aprendizaje estadístico para resolver problemas de clasificación de patrones. Los clasificadores lineales se caracterizan porque aprenden una función lineal para separar las clases. No se trata de una agrupación por similitudes, sin que existe una separación definida entre clases.
 
@@ -81,7 +81,7 @@ En \cite{baltrusaitis2013constrained} se propone el uso de redes neuronales para
 Como se puede observar en las secciones anteriores un problema en especial difícil es la iluminación, por lo que es necesario hablar sobre las técnicas de pre-procesamiento, se entiende como pre-procesamiento a las técnicas que modifican una imagen para acentuar alguna característica, estas serán usadas para afrontar dicho problema.
 
 \subsection{Ecualización de histograma}
-Las ecualización del histograma de una imagen es una transformación que pretende obtener para una imagen un histograma con una distribución uniforme. Es decir, que exista el mismo número de pixeles para cada nivel de gris del histograma de una imagen monocroma (\cite{orlova2002image}).
+Las ecualización del histograma de una imagen es una transformación que pretende obtener para una imagen un histograma con una distribución uniforme. Es decir, que exista el mismo número de pixeles para cada nivel de gris del histograma de una imagen monocroma \citep{orlova2002image}.
 La función de la ecualización es:
 \begin{equation}
 h(v)=Redondeo\Bigg(\frac{cdf(v)-cdf_{min}}{(M\times N)-cdf_{min}} \times (L-1)\Bigg)
@@ -99,7 +99,7 @@ Donde $cdf_{min}$ es el mínimo valor no nulo de la función de distribución de
 
 
 \subsection{Transformada de logaritmo}
-La Transformada de logaritmo asigna un rango estrecho de valores (píxeles en escala de grises o un canal de un espacio de color) de un rango amplio de valores de entrada. La transformada de logaritmos es útil si se necesita expandir los valores de píxeles oscuros de una imagen mientras se comprime los valores altos (\cite{thamiz2015liter})
+La Transformada de logaritmo asigna un rango estrecho de valores (píxeles en escala de grises o un canal de un espacio de color) de un rango amplio de valores de entrada. La transformada de logaritmos es útil si se necesita expandir los valores de píxeles oscuros de una imagen mientras se comprime los valores altos \citep{thamiz2015liter}.
 
 \begin{equation}
 \label{f_log}

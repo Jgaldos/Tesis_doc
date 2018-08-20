@@ -61,11 +61,11 @@ La razón para la elección de grupos de entrenamiento tan reducidos es poder ac
 A continuación se realiza una comparativa del método de reconocimiento usado en la propuesta y otros métodos extraídos del estado del arte.
 
 \section{Comparación de \ac{EBGM} con métodos holísticos}\label{scc:Comparacion}
-Se realizó una comparación de \ac{EBGM} con otros métodos de reconocimiento holísticos usados en la literatura como; \ac{PCA}(\cite{turk1991eigenfaces}), \ac{KFA}(/(\cite{yang2002kernel}) y \ac{LDA}(\cite{zhao1999subspace}), todos ellos implementados en matlab por The PhD Toolbox(\cite{struc2012phd}) para demostrar el rendimiento de estos algoritmos en varias situaciones. Esta comparación se realizo con las tres primeras bases de datos para establecer una diferencia entre el método escogido en la propuesta y otros métodos del estado del arte.
+Se realizó una comparación de \ac{EBGM} con otros métodos de reconocimiento holísticos usados en la literatura como; \ac{PCA}\citep{turk1991eigenfaces}, \ac{KFA}\citep{yang2002kernel} y \ac{LDA}\citep{zhao1999subspace}, todos ellos implementados en matlab por The PhD Toolbox\citep{struc2012phd} para demostrar el rendimiento de estos algoritmos en varias situaciones. Esta comparación se realizo con las tres primeras bases de datos para establecer una diferencia entre el método escogido en la propuesta y otros métodos del estado del arte.
 
 \begin{table}[h]
 \centering
-\caption{Resultados de algoritmos de reconocimiento con bases de datos ATT, Yale A y Georgia}
+\caption{Resultados de aciertos en algoritmos de reconocimiento con bases de datos ATT, Yale A y Georgia}
 \label{Tcomparacion}
 \begin{tabular}{|l|l|l|l|l}
 \cline{1-4}
@@ -141,7 +141,7 @@ Usando como base el trabajo de \cite{bolme2003elastic}, en este trabajo se tiene
 
 La modificación que se sugiere investigar es la de añadir pesos a cada punto fiducial que se compara, ya que se puede concluir que no todos los puntos de un rostros son igualmente importantes para realizar un reconocimiento. 
 
-Un ejemplo, es que los puntos del contorno del rostro o el cabello pueden ser menos importantes que los puntos de los ojos o la nariz, así que se añade un vector de pesos a la función de similitud descrita en la ecuación \ref{FaceGraphSimiFunc} y \ref{GaborJetSimiFunc} y probamos varias combinaciones empíricas bajo el concepto que la información con mayor relevancia se encuentra en la boca, nariz y ojos .
+Un ejemplo, es que los puntos del contorno del rostro o el cabello pueden ser menos importantes que los puntos de los ojos o la nariz, así que se añade un vector de pesos a la función de similitud descrita en las Ecuaciones \ref{FaceGraphSimiFunc} y \ref{GaborJetSimiFunc}, probamos varias combinaciones empíricas bajo el concepto que la información con mayor relevancia se encuentra en la boca, nariz y ojos .
 \begin{equation}
 \label{FaceGraphSimiFuncW}
 L_{jet}(G,G',W)=\frac{1}{N}\sum_{i=0}^{N}S(J_{i},J'_{i},w_{i})
@@ -155,7 +155,7 @@ En las Ecuaciones \ref{FaceGraphSimiFuncW} y \ref{GaborJetSimiFuncW} podemos obs
 
 \begin{table}[h]
 \centering
-\caption{Tabla de distribución de pesos propuesta}
+\caption{Tabla de distribución de pesos propuesta, donde se distribuyen los 25 puntos fiduciales en áreas y a cada una asignadole pesos representados en porcentajes. La configuración 1 le resta importancia la los bordes del rostros, la configuración 2 resalta la importancia de los ojos y el puente de la nariz, y la configuración 3 se se concentra en el centro del rostro incluyendo nariz y boca}
 \label{ta:distPuntos}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
@@ -169,11 +169,11 @@ En las Ecuaciones \ref{FaceGraphSimiFuncW} y \ref{GaborJetSimiFuncW} podemos obs
 \end{tabular}
 \end{table}
 
-En el Cuadro \ref{ta:distPuntos} se observa la agrupaciones que se realizan a los puntos fiduciales y las distribuciones mostradas como porcentajes, donde se le da importancia a áreas que se ubican en el centro del rostro, en el cuadro \ref{ta:Pesos} se puede ver su correspondencia en valores numéricos para la conformación del vector $W$ usado en la Ecuación \ref{FaceGraphSimiFuncW}.
+En el Cuadro \ref{ta:distPuntos} se observa la agrupaciones que se realizan a los puntos fiduciales y las distribuciones mostradas como porcentajes, donde se le da importancia a áreas que se ubican en el centro del rostro, en el Cuadro \ref{ta:Pesos} se puede ver su correspondencia en valores numéricos para la conformación del vector $W$ usado en la Ecuación \ref{FaceGraphSimiFuncW}.
 
 \begin{table}[h]
 \centering
-\caption{Valores del vector W de pesos derivado del Cuadro \ref{ta:distPuntos}}
+\caption{Valores del vector W de pesos derivado del Cuadro \ref{ta:distPuntos}, donde los valores por área representados a través de porcentajes son transformados a números así el valor de 20\% para los ojos y el puente de la nariz en la configuración 1, valen 0.07 en cada ojo y 0.06 para el puente dando como resultado 0.2 el mismo calculo se produce para el resto de áreas y configuraciones.}
 \label{ta:Pesos}
 \resizebox{\textwidth}{!}{
 \begin{tabular}{|l|c|c|c|}
@@ -208,7 +208,7 @@ En el Cuadro \ref{ta:distPuntos} se observa la agrupaciones que se realizan a lo
 }
 \end{table}
 
-En el Cuadro \ref{ta:ResultadosPesos} se observan los resultados de las configuraciones propuestas para modificación la función de similitud de \ac{EBGM}, en la figura \ref{im:ResultadoPesos} vemos que la primera configuración ofrece una mejora de 2\% en la base de datos Georgia y mantiene el rendimiento en el resto de las base de datos. Esta configuración distribuye los pesos uniformemente a todas las áreas del centro del rostro en detrimento de los bordes como son la barbilla y la quijada.
+En el Cuadro \ref{ta:ResultadosPesos} se observan los resultados de las configuraciones propuestas para modificación la función de similitud de \ac{EBGM}, en la Figura \ref{im:ResultadoPesos} vemos que la primera configuración ofrece una mejora de 2\% en la base de datos Georgia y mantiene el rendimiento en el resto de las base de datos. Esta configuración distribuye los pesos uniformemente a todas las áreas del centro del rostro en detrimento de los bordes como son la barbilla y la quijada.
 
 \begin{table}[h]
 \centering
@@ -368,7 +368,7 @@ Para cubrir esta falta de una mejora en iluminación, la propuesta explicada en 
 \end{tabular}
 \end{table}
 
-La unión de procesos expuesta en la ecuación \ref{f_normaliza} es comparada con el algoritmo sin cambios y con la ecualización de histograma, los resultados se pueden observar en el Cuadro \ref{ta:ResultadosIluminacion} y la Figura \ref{im:ResultadoIluminacion} donde existen mejoras del 1\% en comparación al algoritmo original y en la base de datos Yale donde la presencia de grandes contrastes afectan el reconocimiento, la ecualización de histograma obtiene un resultado inferior al algoritmo original, mientras que la propuesta logra una mejora de 1\%.
+La unión de procesos expuesta en la Ecuación \ref{f_normaliza} es comparada con el algoritmo sin cambios y con la ecualización de histograma, los resultados se pueden observar en el Cuadro \ref{ta:ResultadosIluminacion} y la Figura \ref{im:ResultadoIluminacion} donde existen mejoras del 1\% en comparación al algoritmo original y en la base de datos Yale donde la presencia de grandes contrastes afectan el reconocimiento, la ecualización de histograma obtiene un resultado inferior al algoritmo original, mientras que la propuesta logra una mejora de 1\%.
 %como que tenemos que agregar algo mas
 
 \begin{figure}[h]
