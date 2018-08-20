@@ -4,7 +4,7 @@
 En este capítulo se muestran los los resultados de investigación de la presente tesis, el presente capítulo se divide en dos partes. La primera parte son las base de datos con las que se ha trabajado, donde las tres primeras fueron utilizadas para las pruebas iniciales de la investigación, para realizar comparativas entre métodos de reconocimiento de rostro y el análisis paramétrico que se realizó después, mientras que la ultima base de datos fue hecha para las pruebas finales de la propuesta, finalizando la primera parte se explica el método de experimentación que se uso para todas las pruebas
 
 
-La segunda parte muestra varias secciones de resultados como: Comparación de \ac{EBGM} con otros métodos holísticos, Evaluación paramétrica de \ac{EBGM}, Evaluación en el \textit{pipeline} y la pruebas de la propuesta. Las dos primeras secciones se enfocan en \ac{EBGM}, en comparación con otros métodos y el estudio de su funcionamiento a traves de una evaluación paramétrica, la tercera sección se enfoca en prueba de modificaciones propuestas al \textit{pipeline} explicado en el Capítulo \ref{chap:Propuesta}, y finalmente las ultimas secciones se dedican a mostrar los resultados finales de la propuesta en imágenes obtenidas de cámaras de seguridad y su aplicación para reconocer imágenes ofuscadas.
+La segunda parte muestra varias secciones de resultados como: Comparación de \ac{EBGM} con otros métodos holísticos, Evaluación paramétrica de \ac{EBGM}, Evaluación en el \textit{pipeline} y la pruebas de la propuesta. Las dos primeras secciones se enfocan en \ac{EBGM}, en comparación con otros métodos y el estudio de su funcionamiento a través de una evaluación paramétrica, la tercera sección se enfoca en prueba de modificaciones propuestas al \textit{pipeline} explicado en el Capítulo \ref{chap:Propuesta}, y finalmente las ultimas secciones se dedican a mostrar los resultados finales de la propuesta en imágenes obtenidas de cámaras de seguridad y su aplicación para reconocer imágenes ofuscadas.
 
 \section{Base de datos}
 A continuación se menciona una descripción de las bases de datos usadas en las pruebas de este capítulo y una creada a partir de imágenes obtenidas de una cámara de seguridad para la prueba de la propuesta final.
@@ -65,7 +65,7 @@ Se realizó una comparación de \ac{EBGM} con otros métodos de reconocimiento h
 
 \begin{table}[h]
 \centering
-\caption{Resultados de algoritmos de reconocimiento con bases de datos ATT, Yale A y Georgia}}
+\caption{Resultados de algoritmos de reconocimiento con bases de datos ATT, Yale A y Georgia}
 \label{Tcomparacion}
 \begin{tabular}{|l|l|l|l|l}
 \cline{1-4}
@@ -78,12 +78,30 @@ Se realizó una comparación de \ac{EBGM} con otros métodos de reconocimiento h
 \end{table}
 Como se puede apreciar en el Cuadro \ref{Tcomparacion} y mejor aun en la Figura \ref{Fcomparacion}. \ac{EBGM} tiene una tasa de aciertos igual o en algunos casos mejor que los demás métodos comparados. En ninguna de las pruebas realizadas con las tres bases de datos \ac{EBGM} cae por debajo de la tasa de aciertos promedio, esta es una de las razones por la cual se elige a \ac{EBGM} como el método de reconocimiento de rostros en el cual se centra el trabajo de esta tesis.
 
-\begin{figure}[h]
+\begin{figure}[]
 \center
 	\includegraphics[scale=0.8]{Comparativa}
     \caption{Comparación de \ac{EBGM} con otros algoritmos, la escala empieza en 68,00 para que pueda apreciarse las diferencias entre los métodos}
     \label{Fcomparacion}
 \end{figure}
+
+\section{Comparación con otros métodos basados en grafos}
+\begin{table}[h]
+\caption{Comparación de algoritmos basados en grafos}
+\label{Tcomparacion2}
+\begin{tabular}{|l|l|c|}
+\hline
+                         & \textbf{Base de datos}                 & \multicolumn{1}{l|}{\textbf{Resultado reportado}} \\ \hline
+Local Graph Matching     & Base de datos propia                   & 98.4\%                                            \\ \hline
+\ac{RFG}                 & CMU-PIE frontal illumination variation & 96.1\%                                            \\ \hline
+Multiple Facial Features & Cambridge Face Database                & 95.5\%                                            \\ \hline
+\sc{EBGM} si cambios     & Yale A                                 & 97.94 \%                                          \\ \hline
+Propuesta de iluminación & Yale A                                 & 98.53 \%                                          \\ \hline
+\end{tabular}
+\end{table}
+
+Se realizo otra comparación de \ac{EBGM} con los métodos basados en grafos explicados en el capitulo \ref{chap:Revision}, como se ve en el Cuadro \ref{Tcomparacion2}, a pesar de que cada trabajo usa una base de dados diferente, se puede observar que que los métodos basados en grafos tiende a un mejor desempeño si los comparamos con los métodos holistícos vistos en el Cuadro \ref{Tcomparacion}, por ello se decide usar \ac{EBGM} como método base para nuestro trabajo, al ser un método bien conocido en el estado del arte.
+
 \section{Evaluación paramétrica de \ac{EBGM}}
 
 El método elegido para el proceso de reconocimiento de rostros es \ac{EBGM}, este ha sido elegido por sus resultado en la comparativa realizada en la Sección \ref{scc:Comparacion}, también por ser un método que es considerado biométrico por lo expuesto en el Capítulo \ref{chap:Conceptos}.
