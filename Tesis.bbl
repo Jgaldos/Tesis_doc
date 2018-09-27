@@ -6,14 +6,14 @@ Alice, I. (2003).
 \newblock {\em IEEE Security \& Privacy}.
 
 \bibitem[Baltrusaitis et~al., 2013]{baltrusaitis2013constrained}
-Baltrusaitis, T., Robinson, P., and Morency, L.-P. (2013).
+Baltrusaitis, T., Robinson, P., y Morency, L.-P. (2013).
 \newblock Constrained local neural fields for robust facial landmark detection
   in the wild.
 \newblock In {\em Proceedings of the IEEE International Conference on Computer
   Vision Workshops}, pages 354--361.
 
 \bibitem[Baltru\v{s}aitis et~al., 2016]{Baltrusaitis2016}
-Baltru\v{s}aitis, T., Robinson, P., and Morency, L.-P. (2016).
+Baltru\v{s}aitis, T., Robinson, P., y Morency, L.-P. (2016).
 \newblock Openface: an open source facial behavior analysis toolkit.
 \newblock In {\em IEEE Winter Conference on Applications of Computer Vision}.
 
@@ -23,18 +23,18 @@ Bolme, D.~S. (2003).
 \newblock PhD thesis, Colorado State University.
 
 \bibitem[Bruce et~al., 1998]{bruce1998human}
-Bruce, V., Hancock, P.~J., and Burton, A.~M. (1998).
+Bruce, V., Hancock, P.~J., y Burton, A.~M. (1998).
 \newblock Human face perception and identification.
 \newblock In {\em Face Recognition}, pages 51--72. Springer.
 
 \bibitem[Burton et~al., 1999]{burton1999face}
-Burton, A.~M., Wilson, S., Cowan, M., and Bruce, V. (1999).
+Burton, A.~M., Wilson, S., Cowan, M., y Bruce, V. (1999).
 \newblock Face recognition in poor-quality video: Evidence from security
   surveillance.
 \newblock {\em Psychological Science}, 10(3):243--248.
 
-\bibitem[Caceres and Ch{\'a}vez, 2016]{caceres2016modifications}
-Caceres, J. C.~G. and Ch{\'a}vez, J. R.~G. (2016).
+\bibitem[Caceres y Ch{\'a}vez, 2016]{caceres2016modifications}
+Caceres, J. C.~G. y Ch{\'a}vez, J. R.~G. (2016).
 \newblock Modifications on illumination, distance function and gabor masks for
   elastic bunch graph matching.
 \newblock In {\em Computer Science Society (SCCC), 2016 35th International
@@ -44,40 +44,40 @@ Caceres, J. C.~G. and Ch{\'a}vez, J. R.~G. (2016).
 Cambridge, A.~L. (2002).
 \newblock Att the database of faces (formerly the orl database of faces).
 
-\bibitem[Cortes and Vapnik, 1995]{cortes1995support}
-Cortes, C. and Vapnik, V. (1995).
+\bibitem[Cortes y Vapnik, 1995]{cortes1995support}
+Cortes, C. y Vapnik, V. (1995).
 \newblock Support-vector networks.
 \newblock {\em Machine learning}, 20(3):273--297.
 
-\bibitem[Cottrell and Fleming, 1990]{cottrell1990face}
-Cottrell, G.~W. and Fleming, M. (1990).
+\bibitem[Cottrell y Fleming, 1990]{cottrell1990face}
+Cottrell, G.~W. y Fleming, M. (1990).
 \newblock Face recognition using unsupervised feature extraction.
 \newblock In {\em Proc. of the Int. Neural Network Conf}, pages 322--325.
 
-\bibitem[Dalal and Triggs, 2005]{dalal2005histograms}
-Dalal, N. and Triggs, B. (2005).
+\bibitem[Dalal y Triggs, 2005]{dalal2005histograms}
+Dalal, N. y Triggs, B. (2005).
 \newblock Histograms of oriented gradients for human detection.
 \newblock In {\em 2005 IEEE Computer Society Conference on Computer Vision and
   Pattern Recognition (CVPR'05)}, volume~1, pages 886--893. IEEE.
 
 \bibitem[Er et~al., 2002]{er2002face}
-Er, M.~J., Wu, S., Lu, J., and Toh, H.~L. (2002).
+Er, M.~J., Wu, S., Lu, J., y Toh, H.~L. (2002).
 \newblock Face recognition with radial basis function (rbf) neural networks.
 \newblock {\em IEEE transactions on neural networks}, 13(3):697--710.
 
 \bibitem[Fazl-Ersi et~al., 2007]{fazl2007robust}
-Fazl-Ersi, E., Zelek, J.~S., and Tsotsos, J.~K. (2007).
+Fazl-Ersi, E., Zelek, J.~S., y Tsotsos, J.~K. (2007).
 \newblock Robust face recognition through local graph matching.
 \newblock {\em Journal of Multimedia}, 2(5):31--37.
 
 \bibitem[Georghiades et~al., 1997]{georghiades1997yale}
-Georghiades, A., Belhumeur, P., and Kriegman, D. (1997).
+Georghiades, A., Belhumeur, P., y Kriegman, D. (1997).
 \newblock Yale face database.
 \newblock {\em Center for computational Vision and Control at Yale University,
   http://cvc. yale. edu/projects/yalefaces/yalefa}, 2.
 
 \bibitem[Givens et~al., 2004]{givens2004features}
-Givens, G., Beveridge, J.~R., Draper, B.~A., Grother, P., and Phillips, P.~J.
+Givens, G., Beveridge, J.~R., Draper, B.~A., Grother, P., y Phillips, P.~J.
   (2004).
 \newblock How features of the human face affect recognition: a statistical
   comparison of three face recognition algorithms.
@@ -86,20 +86,20 @@ Givens, G., Beveridge, J.~R., Draper, B.~A., Grother, P., and Phillips, P.~J.
   II--381. IEEE.
 
 \bibitem[Gorodnichy et~al., 2014]{gorodnichy2014survey}
-Gorodnichy, D., Granger, E., Radtke, P., Authority, C.~S., and Meunier, P.
+Gorodnichy, D., Granger, E., Radtke, P., Authority, C.~S., y Meunier, P.
   (2014).
 \newblock Survey of commercial technologies for face recognition in video.
 \newblock {\em CBSA, Border Technology Division, Tech. Rep}, 22.
 
-\bibitem[Gross and Brajovic, 2003]{gross2003image}
-Gross, R. and Brajovic, V. (2003).
+\bibitem[Gross y Brajovic, 2003]{gross2003image}
+Gross, R. y Brajovic, V. (2003).
 \newblock An image preprocessing algorithm for illumination invariant face
   recognition.
 \newblock In {\em International Conference on Audio-and Video-Based Biometric
   Person Authentication}, pages 10--18. Springer.
 
 \bibitem[Gross et~al., 2001]{gross2001quo}
-Gross, R., Shi, J., and Cohn, J.~F. (2001).
+Gross, R., Shi, J., y Cohn, J.~F. (2001).
 \newblock {\em Quo vadis face recognition?}
 \newblock Carnegie Mellon University, The Robotics Institute.
 
@@ -108,48 +108,48 @@ Harvey, A. (2014).
 \newblock Cv dazzle (2010--2012) http://cvdazzle.com/ and
   http://ahprojects.com/projects/cv-dazzle.
 
-\bibitem[Hill and Bruce, 1996]{hill1996effects}
-Hill, H. and Bruce, V. (1996).
+\bibitem[Hill y Bruce, 1996]{hill1996effects}
+Hill, H. y Bruce, V. (1996).
 \newblock The effects of lighting on the perception of facial surfaces.
 \newblock {\em Journal of Experimental Psychology: Human Perception and
   Performance}, 22(4):986.
 
 \bibitem[Hill et~al., 1997]{hill1997information}
-Hill, H., Schyns, P.~G., and Akamatsu, S. (1997).
+Hill, H., Schyns, P.~G., y Akamatsu, S. (1997).
 \newblock Information and viewpoint dependence in face recognition.
 \newblock {\em Cognition}, 62(2terzopoulos1988constraints):201--222.
 
 \bibitem[Huang et~al., 2003]{huang2003component}
-Huang, J., Heisele, B., and Blanz, V. (2003).
+Huang, J., Heisele, B., y Blanz, V. (2003).
 \newblock Component-based face recognition with 3d morphable models.
 \newblock In {\em International conference on audio-and video-based biometric
   person authentication}, pages 27--34. Springer.
 
 \bibitem[Johnston et~al., 1992]{johnston1992recognising}
-Johnston, A., Hill, H., and Carman, N. (1992).
+Johnston, A., Hill, H., y Carman, N. (1992).
 \newblock Recognising faces: effects of lighting direction, inversion, and
   brightness reversal.
 \newblock {\em Perception}, 21(3):365--375.
 
 \bibitem[Kafai et~al., 2014]{kafai2014reference}
-Kafai, M., An, L., and Bhanu, B. (2014).
+Kafai, M., An, L., y Bhanu, B. (2014).
 \newblock Reference face graph for face recognition.
 \newblock {\em IEEE Transactions on information forensics and security},
   9(12):2132--2143.
 
 \bibitem[Kalocsai et~al., 1998]{kalocsai1998face}
-Kalocsai, P., Zhao, W., and Elagin, E. (1998).
+Kalocsai, P., Zhao, W., y Elagin, E. (1998).
 \newblock Face similarity space as perceived by humans and artificial systems.
 \newblock In {\em Automatic Face and Gesture Recognition, 1998. Proceedings.
   Third IEEE International Conference on}, pages 177--180. IEEE.
 
-\bibitem[Liao and Li, 2000]{liao2000face}
-Liao, R. and Li, S.~Z. (2000).
+\bibitem[Liao y Li, 2000]{liao2000face}
+Liao, R. y Li, S.~Z. (2000).
 \newblock Face recognition based on multiple facial features.
 \newblock In {\em fg}, page 239. IEEE.
 
 \bibitem[Lin et~al., 1997]{lin1997face}
-Lin, S.-H., Kung, S.-Y., and Lin, L.-J. (1997).
+Lin, S.-H., Kung, S.-Y., y Lin, L.-J. (1997).
 \newblock Face recognition/detection by probabilistic decision-based neural
   network.
 \newblock {\em IEEE transactions on neural networks}, 8(1):114--132.
@@ -168,19 +168,19 @@ Manjula, V. (2014).
 \newblock {\em International Journal of Science and Research (IJSR)}.
 
 \bibitem[McPherson et~al., 2016]{mcpherson2016defeating}
-McPherson, R., Shokri, R., and Shmatikov, V. (2016).
+McPherson, R., Shokri, R., y Shmatikov, V. (2016).
 \newblock Defeating image obfuscation with deep learning.
 \newblock {\em arXiv preprint arXiv:1609.00408}.
 
 \bibitem[Nazare et~al., 2014]{nazare2014smart}
-Nazare, A.~C., Dos~Santos, C.~E., Ferreira, R., and Schwartz, W.~R. (2014).
+Nazare, A.~C., Dos~Santos, C.~E., Ferreira, R., y Schwartz, W.~R. (2014).
 \newblock Smart surveillance framework: A versatile tool for video analysis.
 \newblock In {\em IEEE Winter Conference on Applications of Computer Vision},
   pages 753--760. IEEE.
 
 \bibitem[Odobez et~al., 2012]{odobez2012unsupervised}
 Odobez, J.-M., Carincotte, C., Emonet, R., Jouneau, E., Zaidenberg, S., Ravera,
-  B., Bremond, F., and Grifoni, A. (2012).
+  B., Bremond, F., y Grifoni, A. (2012).
 \newblock Unsupervised activity analysis and monitoring algorithms for
   effective surveillance systems.
 \newblock In {\em European Conference on Computer Vision}, pages 675--678.
@@ -192,13 +192,13 @@ Orlova, E.~V. (2002).
   (1998), 771 pages. isbn 0849325323, \$ 139.95.
 
 \bibitem[Pandya et~al., 2013]{pandya2013survey}
-Pandya, J.~M., Rathod, D., and Jadav, J.~J. (2013).
+Pandya, J.~M., Rathod, D., y Jadav, J.~J. (2013).
 \newblock A survey of face recognition approach.
 \newblock {\em International Journal of Engineering Research and Applications
   (IJERA)}, 3(1):632--635.
 
-\bibitem[Parmar and Mehta, 2014]{parmar2014face}
-Parmar, D.~N. and Mehta, B.~B. (2014).
+\bibitem[Parmar y Mehta, 2014]{parmar2014face}
+Parmar, D.~N. y Mehta, B.~B. (2014).
 \newblock Face recognition methods \& applications.
 \newblock {\em arXiv preprint arXiv:1403.0485}.
 
@@ -208,8 +208,8 @@ Schwartz, A. (2012).
   regulated threat to our privacy.
 \newblock {\em Nw. J. Tech. \& Intell. Prop.}, 11:ix.
 
-\bibitem[Sirovich and Kirby, 1987]{sirovich1987low}
-Sirovich, L. and Kirby, M. (1987).
+\bibitem[Sirovich y Kirby, 1987]{sirovich1987low}
+Sirovich, L. y Kirby, M. (1987).
 \newblock Low-dimensional procedure for the characterization of human faces.
 \newblock {\em JOSA A}, 4(3):519--524.
 
@@ -227,14 +227,14 @@ Szeliski, R. (2010).
 Tech, G. (1999).
 \newblock Georgia tech face database.
 
-\bibitem[Thamizharasi and Jayasudha, 2015]{thamiz2015liter}
-Thamizharasi, A. and Jayasudha, J. (2015).
+\bibitem[Thamizharasi y Jayasudha, 2015]{thamiz2015liter}
+Thamizharasi, A. y Jayasudha, J. (2015).
 \newblock A literature survey on various illumination normalization techniques
   for face recognition with fuzzy k nearest neighbour classifier.
 \newblock {\em ICTACT Journal on Image \& Video Processing}, 5(4).
 
 \bibitem[Tian et~al., 2005]{tian2005robust}
-Tian, Y.-L., Lu, M., and Hampapur, A. (2005).
+Tian, Y.-L., Lu, M., y Hampapur, A. (2005).
 \newblock Robust and efficient foreground analysis for real-time video
   surveillance.
 \newblock In {\em 2005 IEEE Computer Society Conference on Computer Vision and
@@ -247,13 +247,13 @@ Tseng, S. (2003).
 \newblock PhD thesis, School of Computer Science and Information Technology,
   Faculty of Applied Science, Royal Melbourne Institute of Technology.
 
-\bibitem[Turk and Pentland, 1991]{turk1991eigenfaces}
-Turk, M. and Pentland, A. (1991).
+\bibitem[Turk y Pentland, 1991]{turk1991eigenfaces}
+Turk, M. y Pentland, A. (1991).
 \newblock Eigenfaces for recognition.
 \newblock {\em Journal of cognitive neuroscience}, 3(1):71--86.
 
-\bibitem[Viola and Jones, 2001]{viola2001rapid}
-Viola, P. and Jones, M. (2001).
+\bibitem[Viola y Jones, 2001]{viola2001rapid}
+Viola, P. y Jones, M. (2001).
 \newblock Rapid object detection using a boosted cascade of simple features.
 \newblock In {\em Computer Vision and Pattern Recognition, 2001. CVPR 2001.
   Proceedings of the 2001 IEEE Computer Society Conference on}, volume~1, pages
@@ -267,13 +267,13 @@ Vishwakarma, V.~P. (2015).
   6(1):17--34.
 
 \bibitem[Wiskott et~al., 1997]{wiskott1997face}
-Wiskott, L., Fellous, J.-M., Kuiger, N., and Von Der~Malsburg, C. (1997).
+Wiskott, L., Fellous, J.-M., Kuiger, N., y Von Der~Malsburg, C. (1997).
 \newblock Face recognition by elastic bunch graph matching.
 \newblock {\em Pattern Analysis and Machine Intelligence, IEEE Transactions
   on}, 19(7):775--779.
 
 \bibitem[Wood et~al., 2006]{wood2006report}
-Wood, D.~M., Ball, K., Lyon, D., Norris, C., and Raab, C. (2006).
+Wood, D.~M., Ball, K., Lyon, D., Norris, C., y Raab, C. (2006).
 \newblock A report on the surveillance society.
 \newblock {\em Surveillance Studies Network, UK}.
 
@@ -283,18 +283,18 @@ Yang, M.-H. (2002).
   kernel methods.
 \newblock In {\em fgr}, volume~2, page 215.
 
-\bibitem[Zhao and Yang, 1999]{zhao1999theoretical}
-Zhao, L. and Yang, Y.-H. (1999).
+\bibitem[Zhao y Yang, 1999]{zhao1999theoretical}
+Zhao, L. y Yang, Y.-H. (1999).
 \newblock Theoretical analysis of illumination in pca-based vision systems.
 \newblock {\em Pattern recognition}, 32(4):547--564.
 
 \bibitem[Zhao et~al., 1999]{zhao1999subspace}
-Zhao, W., Chellappa, R., and Phillips, P.~J. (1999).
+Zhao, W., Chellappa, R., y Phillips, P.~J. (1999).
 \newblock {\em Subspace linear discriminant analysis for face recognition}.
 \newblock Citeseer.
 
 \bibitem[Zhao et~al., 2003]{zhao2003face}
-Zhao, W., Chellappa, R., Phillips, P.~J., and Rosenfeld, A. (2003).
+Zhao, W., Chellappa, R., Phillips, P.~J., y Rosenfeld, A. (2003).
 \newblock Face recognition: A literature survey.
 \newblock {\em Acm Computing Surveys (CSUR)}, 35(4):399--458.
 
